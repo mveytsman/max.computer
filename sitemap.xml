@@ -11,11 +11,6 @@
   </url>
   
   <url>
-    <loc>http://max.computer/blog/the-perils-of-doing-sicp-on-modern-computers/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://max.computer/blog/last-days-of-the-pirate-bay/</loc>
     <lastmod>2014-12-12T00:00:00+00:00</lastmod>
   </url>
@@ -47,11 +42,6 @@
   
   <url>
     <loc>http://max.computer/blog/hacker-school-the-first-three-weeks/</loc>
-    <lastmod>2014-06-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://max.computer/blog/on-functional-testing/</loc>
     <lastmod>2014-06-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -90,7 +80,7 @@
   
   <url>
     <loc>http://max.computer/blog/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2014-12-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -127,7 +117,7 @@
   
   <url>
     <loc>http://max.computer/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2014-12-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
