@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Security Devops on Max.Computer</title>
-    <link>https://example.com/categories/security-devops/</link>
+    <link>http://max.computer/categories/security-devops/</link>
     <description>Recent content in Security Devops on Max.Computer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
     <lastBuildDate>Wed, 31 Oct 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.com/categories/security-devops/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://max.computer/categories/security-devops/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Breaking in and out of Vagrant</title>
-      <link>https://example.com/blog/breaking-in-and-out-of-vagrant/</link>
+      <link>http://max.computer/blog/breaking-in-and-out-of-vagrant/</link>
       <pubDate>Wed, 31 Oct 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/blog/breaking-in-and-out-of-vagrant/</guid>
+      <guid>http://max.computer/blog/breaking-in-and-out-of-vagrant/</guid>
       <description>**You can also find this post on my consultancy&amp;rsquo;s blog here **
 Vagrant is a great tool that allows you to easily spawn and configure lightweight VMs to use as development environments. Vagrant provides base installs of several flavours of Linux, and takes care of setting up networking and shared folders for you.
 Vagrant is really useful for managing your development environment, and I highly recommend it. If you&amp;rsquo;re doing a lot of development, you might need to be running all kinds of application and database servers on your machine, and it&amp;rsquo;s probably a much better idea to run them in a VM rather than on your host machine.</description>

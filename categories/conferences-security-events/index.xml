@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Conferences Security Events on Max.Computer</title>
-    <link>https://example.com/categories/conferences-security-events/</link>
+    <link>http://max.computer/categories/conferences-security-events/</link>
     <description>Recent content in Conferences Security Events on Max.Computer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
     <lastBuildDate>Sat, 30 Nov 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.com/categories/conferences-security-events/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://max.computer/categories/conferences-security-events/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Thoughts on BsidesTO</title>
-      <link>https://example.com/blog/thoughts-on-bsidesto/</link>
+      <link>http://max.computer/blog/thoughts-on-bsidesto/</link>
       <pubDate>Sat, 30 Nov 2013 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/blog/thoughts-on-bsidesto/</guid>
+      <guid>http://max.computer/blog/thoughts-on-bsidesto/</guid>
       <description>Last month, I helped organize a security conference in Toronto called BsidesTO. I&amp;rsquo;ve attended and volunteered at my fair share of conferences, but this is the first time I&amp;rsquo;ve had an integral role in throwing and event of this scale.
 One day, two floors, 14 speakers, and over 150 attendees. It was a blast. An exhausting blast.
 Bsides. is a brand for security conferences around the world.

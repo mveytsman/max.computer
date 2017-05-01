@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Security on Max.Computer</title>
-    <link>https://example.com/categories/security/</link>
+    <link>http://max.computer/categories/security/</link>
     <description>Recent content in Security on Max.Computer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
     <lastBuildDate>Tue, 25 Feb 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.com/categories/security/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://max.computer/categories/security/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to locate any Tinder user</title>
-      <link>https://example.com/blog/how-to-locate-any-tinder-user/</link>
+      <link>http://max.computer/blog/how-to-locate-any-tinder-user/</link>
       <pubDate>Tue, 25 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/blog/how-to-locate-any-tinder-user/</guid>
+      <guid>http://max.computer/blog/how-to-locate-any-tinder-user/</guid>
       <description>You can also find this post on my consultancy&amp;rsquo;s blog here
 Last fall, while performing some bespoke security research for one of our clients, I found a way to locate any Tinder user using trilateration. Here&amp;rsquo;s what the proof of concept looks like:
 I did a guest post over at the Include Security blog about how I was able to track the location of any Tinder user.</description>

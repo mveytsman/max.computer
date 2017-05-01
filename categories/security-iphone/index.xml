@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Security Iphone on Max.Computer</title>
-    <link>https://example.com/categories/security-iphone/</link>
+    <link>http://max.computer/categories/security-iphone/</link>
     <description>Recent content in Security Iphone on Max.Computer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
     <lastBuildDate>Fri, 09 Nov 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.com/categories/security-iphone/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://max.computer/categories/security-iphone/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hacking Letterpress</title>
-      <link>https://example.com/blog/hacking-letterpress/</link>
+      <link>http://max.computer/blog/hacking-letterpress/</link>
       <pubDate>Fri, 09 Nov 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/blog/hacking-letterpress/</guid>
+      <guid>http://max.computer/blog/hacking-letterpress/</guid>
       <description>You can also find this post on my consultancy&amp;rsquo;s blog here
 Letterpress is an iOS game that came out a few weeks ago and immediately became popular enough to take down Apple&amp;rsquo;s GameCenter. It&amp;rsquo;s a cross between Scrabble and Go. The game is played on a board made out of 25 letters and players take turns building words in order to capture the letters they use.
 I was hopelessly addicted to Letterpress until I figured out how to win consistently.</description>

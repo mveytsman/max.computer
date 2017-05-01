@@ -3,175 +3,175 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://example.com/projects/gemcanary/</loc>
+    <loc>http://max.computer/projects/gemcanary/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/about/</loc>
+    <loc>http://max.computer/about/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/blog/the-perils-of-doing-sicp-on-modern-computers/</loc>
+    <loc>http://max.computer/blog/the-perils-of-doing-sicp-on-modern-computers/</loc>
     <lastmod>2016-03-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/last-days-of-the-pirate-bay/</loc>
+    <loc>http://max.computer/blog/last-days-of-the-pirate-bay/</loc>
     <lastmod>2014-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/solving-the-expression-problem-in-clojure/</loc>
+    <loc>http://max.computer/blog/solving-the-expression-problem-in-clojure/</loc>
     <lastmod>2014-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</loc>
+    <loc>http://max.computer/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</loc>
     <lastmod>2014-07-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</loc>
+    <loc>http://max.computer/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</loc>
     <lastmod>2014-07-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/delimited-continuations-in-ruby-part-1/</loc>
+    <loc>http://max.computer/blog/delimited-continuations-in-ruby-part-1/</loc>
     <lastmod>2014-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/doorbot-overflow/</loc>
+    <loc>http://max.computer/blog/doorbot-overflow/</loc>
     <lastmod>2014-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/hacker-school-the-first-three-weeks/</loc>
+    <loc>http://max.computer/blog/hacker-school-the-first-three-weeks/</loc>
     <lastmod>2014-06-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/on-functional-testing/</loc>
+    <loc>http://max.computer/blog/on-functional-testing/</loc>
     <lastmod>2014-06-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/how-to-locate-any-tinder-user/</loc>
+    <loc>http://max.computer/blog/how-to-locate-any-tinder-user/</loc>
     <lastmod>2014-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/thoughts-on-bsidesto/</loc>
+    <loc>http://max.computer/blog/thoughts-on-bsidesto/</loc>
     <lastmod>2013-11-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/hacking-letterpress/</loc>
+    <loc>http://max.computer/blog/hacking-letterpress/</loc>
     <lastmod>2012-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/breaking-in-and-out-of-vagrant/</loc>
+    <loc>http://max.computer/blog/breaking-in-and-out-of-vagrant/</loc>
     <lastmod>2012-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</loc>
+    <loc>http://max.computer/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</loc>
     <lastmod>2012-08-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/projects/</loc>
+    <loc>http://max.computer/projects/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/projects/appcanary/</loc>
+    <loc>http://max.computer/projects/appcanary/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/blog/</loc>
+    <loc>http://max.computer/blog/</loc>
     <lastmod>2016-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/</loc>
+    <loc>http://max.computer/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/conferences-security-events/</loc>
+    <loc>http://max.computer/categories/conferences-security-events/</loc>
     <lastmod>2013-11-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/projects/dilettante/</loc>
+    <loc>http://max.computer/projects/dilettante/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/categories/hacker_school/</loc>
+    <loc>http://max.computer/categories/hacker_school/</loc>
     <lastmod>2014-07-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/hacker_school-security/</loc>
+    <loc>http://max.computer/categories/hacker_school-security/</loc>
     <lastmod>2014-07-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/projects/piratebay/</loc>
+    <loc>http://max.computer/projects/piratebay/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/</loc>
+    <loc>http://max.computer/</loc>
     <lastmod>2016-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/security/</loc>
+    <loc>http://max.computer/categories/security/</loc>
     <lastmod>2014-02-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/security-ctfs/</loc>
+    <loc>http://max.computer/categories/security-ctfs/</loc>
     <lastmod>2012-08-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/security-devops/</loc>
+    <loc>http://max.computer/categories/security-devops/</loc>
     <lastmod>2012-10-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/security-hacker_school/</loc>
+    <loc>http://max.computer/categories/security-hacker_school/</loc>
     <lastmod>2014-07-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/categories/security-iphone/</loc>
+    <loc>http://max.computer/categories/security-iphone/</loc>
     <lastmod>2012-11-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/projects/stateio/</loc>
+    <loc>http://max.computer/projects/stateio/</loc>
   </url>
   
   <url>
-    <loc>https://example.com/tags/</loc>
+    <loc>http://max.computer/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/projects/tinder/</loc>
+    <loc>http://max.computer/projects/tinder/</loc>
   </url>
   
 </urlset>

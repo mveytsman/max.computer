@@ -2,84 +2,84 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Max.Computer</title>
-    <link>https://example.com/categories/</link>
+    <link>http://max.computer/categories/</link>
     <description>Recent content in Categories on Max.Computer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
     
-	<atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://max.computer/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Conferences Security Events</title>
-      <link>https://example.com/categories/conferences-security-events/</link>
+      <link>http://max.computer/categories/conferences-security-events/</link>
       <pubDate>Sat, 30 Nov 2013 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/conferences-security-events/</guid>
+      <guid>http://max.computer/categories/conferences-security-events/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hacker_school</title>
-      <link>https://example.com/categories/hacker_school/</link>
+      <link>http://max.computer/categories/hacker_school/</link>
       <pubDate>Mon, 21 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/hacker_school/</guid>
+      <guid>http://max.computer/categories/hacker_school/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hacker_school Security</title>
-      <link>https://example.com/categories/hacker_school-security/</link>
+      <link>http://max.computer/categories/hacker_school-security/</link>
       <pubDate>Thu, 03 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/hacker_school-security/</guid>
+      <guid>http://max.computer/categories/hacker_school-security/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security</title>
-      <link>https://example.com/categories/security/</link>
+      <link>http://max.computer/categories/security/</link>
       <pubDate>Tue, 25 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/security/</guid>
+      <guid>http://max.computer/categories/security/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security Ctfs</title>
-      <link>https://example.com/categories/security-ctfs/</link>
+      <link>http://max.computer/categories/security-ctfs/</link>
       <pubDate>Thu, 30 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/security-ctfs/</guid>
+      <guid>http://max.computer/categories/security-ctfs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security Devops</title>
-      <link>https://example.com/categories/security-devops/</link>
+      <link>http://max.computer/categories/security-devops/</link>
       <pubDate>Wed, 31 Oct 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/security-devops/</guid>
+      <guid>http://max.computer/categories/security-devops/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security Hacker_school</title>
-      <link>https://example.com/categories/security-hacker_school/</link>
+      <link>http://max.computer/categories/security-hacker_school/</link>
       <pubDate>Mon, 28 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/security-hacker_school/</guid>
+      <guid>http://max.computer/categories/security-hacker_school/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security Iphone</title>
-      <link>https://example.com/categories/security-iphone/</link>
+      <link>http://max.computer/categories/security-iphone/</link>
       <pubDate>Fri, 09 Nov 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/categories/security-iphone/</guid>
+      <guid>http://max.computer/categories/security-iphone/</guid>
       <description></description>
     </item>
     
