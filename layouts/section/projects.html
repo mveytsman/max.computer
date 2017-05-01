@@ -1,0 +1,27 @@
+{{ partial "header.html" . }}
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="posts">
+                <div class="page-heading">Projects</div>
+                <ul>
+                    {{ range .Params.project_categories }}
+                    <li class="groupby">{{ .category }}</li>
+                    {{ range .projects }}
+                    {{ partial "project_li.html" . }}
+                    {{ end }}
+                    {{ end }}
+                </ul>
+                <!-- <ul>
+                     {{ range .Data.Pages.GroupByParam "project_type"}}
+                     <li class="groupby">{{ .Key }}</li>
+                     {{ range .Pages }}
+                     {{ partial "project_li.html" . }}
+                     {{ end }}
+                     {{ end }}
+                     </ul> -->
+            </div>
+        </div>
+    </div>
+</section>
+{{ partial "footer.html" . }}
