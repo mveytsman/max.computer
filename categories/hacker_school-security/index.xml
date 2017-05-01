@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hacker_school Security on Max.Computer</title>
+    <link>https://example.com/categories/hacker_school-security/</link>
+    <description>Recent content in Hacker_school Security on Max.Computer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
+    <lastBuildDate>Thu, 03 Jul 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/categories/hacker_school-security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Doorbot Overflow</title>
+      <link>https://example.com/blog/doorbot-overflow/</link>
+      <pubDate>Thu, 03 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/doorbot-overflow/</guid>
+      <description>Today was presentation day at Hacker School. I have a 10 minute talk about &amp;ldquo;building a better doorbot&amp;rdquo; which was secretly a talk about exploiting stack buffer overflows. People seemed to enjoy it.
+The slides are available here, and the source code is here.</description>
+    </item>
+    
+  </channel>
+</rss>

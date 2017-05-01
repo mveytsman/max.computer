@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security Ctfs on Max.Computer</title>
+    <link>https://example.com/categories/security-ctfs/</link>
+    <description>Recent content in Security Ctfs on Max.Computer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
+    <lastBuildDate>Thu, 30 Aug 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/categories/security-ctfs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My solutions to the Stripe CTF (web app edition)</title>
+      <link>https://example.com/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</link>
+      <pubDate>Thu, 30 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</guid>
+      <description>You can also find this post on my consultancy&amp;rsquo;s blog here
+Stripe recently ran a CTF focused on web application hacking. It ended yesterday, and I decided to write up my solutions. If you have any questions or find a bug in my solutions, you can reach me at max [at] state.io.
+First of all, I had an great time solving these challenges. Big thanks to the Stripe team for creating such a fun game.</description>
+    </item>
+    
+  </channel>
+</rss>

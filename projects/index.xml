@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max.Computer</title>
+    <link>https://example.com/projects/</link>
+    <description>Recent content on Max.Computer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
+    
+	<atom:link href="https://example.com/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Appcanary</title>
+      <link>https://example.com/projects/appcanary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/appcanary/</guid>
+      <description>In 2015, we transitioned our consultancy into a product company and I switched my title from the ambiguous &amp;ldquo;partner&amp;rdquo; to the equally ambiguous but more startupy &amp;ldquo;founder.&amp;rdquo;
+Appcanary tracks vulnerabilities in open source software, and notifies you if one of your dependencies needs to be upgraded. We were part of Y Combinator in the summer of 2015, and I&amp;rsquo;ve been writing code and talking to users ever since.</description>
+    </item>
+    
+    <item>
+      <title>Dilettante</title>
+      <link>https://example.com/projects/dilettante/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/dilettante/</guid>
+      <description>The main public repository for Java-ecosystem packages is Maven Central. I discovered that when you installed Java packages using a tool like maven or ant, they were served unencrypted over HTTP, without any sort of cryptographic verification of their contents. Anyone who has control over a wifi router could trick Java developers into downloading compromised Jars and run arbitrary code on their systems.
+I tried asking the company that runs Maven Central nicely to change this, but they didn&amp;rsquo;t budge.</description>
+    </item>
+    
+    <item>
+      <title>Last Days of Pirate Bay</title>
+      <link>https://example.com/projects/piratebay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/piratebay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>State Machinery</title>
+      <link>https://example.com/projects/stateio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/stateio/</guid>
+      <description>For two and a half years, I ran a boutique consultancy. We provided a mix of security and development services, meaning that on any given day I could be developing and MVP, hacking into someone&amp;rsquo;s network, or debugging legacy software.</description>
+    </item>
+    
+    <item>
+      <title>Tinder Finder</title>
+      <link>https://example.com/projects/tinder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/tinder/</guid>
+      <description>I discovered that Tinder would return distances between users with extremely high precision. This is a problem because it allows you to deduce the exact location of a Tinder user by measuring their distance to three known points (this is called trilateration).
+I made a demo application to geolocate Tinder users in order to demonstrate to Tinder how serious of an issue this was. They fixed the problem, and afterwards I disclosed it publicly.</description>
+    </item>
+    
+    <item>
+      <title>Gemcanary</title>
+      <link>https://example.com/projects/gemcanary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/gemcanary/</guid>
+      <description>After the Ruby security apocalypse, we had to figure out if any of our projects at State Machinery were vulnerable and patch them. We realized that manually checking Gemfiles for vulnerable versions was tedious and prone to error, so we built Gemcanary to monitor your Gemfiles and email you if any vulnerabilities came out.
+Gemcanary was designed as a free service to drive traffic to our consultancy, but after a few years we realized that focusing on commercializing the product was the right move and wound down the consultancy to focus on our current canary-themed venture, Appcanary.</description>
+    </item>
+    
+  </channel>
+</rss>

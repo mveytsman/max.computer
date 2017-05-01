@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Example blog">
+
+
+    <meta property="twitter:site" content="@mveytsman">
+
+<meta property="twitter:title" content="The perils of doing SICP on modern computers">
+
+    <meta property="twitter:card" content="summary">
+
+<meta property="twitter:description" content="">
+
+<title>
+
+
+     Max.Computer - The perils of doing SICP on modern computers 
+
+</title>
+<link rel="canonical" href="https://example.com/blog/the-perils-of-doing-sicp-on-modern-computers/">
+
+
+<style media="screen">
+  @font-face {
+  font-family: 'Nexa Bold';
+  src: url('/fonts/Nexa Bold.otf');
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+a,
+a:visited,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+html {
+  height: 100%;
+  font-size: 16px;
+}
+body {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100%;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  color: #111111;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility !important;
+}
+.icon {
+  text-rendering: geometricPrecision !important;
+}
+section {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  width: 100%;
+}
+.container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  width: 100%;
+}
+section.header .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+section.header .content {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+section.header .container .logo {
+  max-width: 100px;
+  margin-left: -2em;
+}
+section.header .name {
+  padding-top: 20px;
+  font-size: 28px;
+  font-family: 'Nexa Bold', 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  text-transform: uppercase;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+  color: #555555;
+}
+section.header nav {
+  margin-bottom: 16px;
+}
+section.header nav ul {
+  list-style: none;
+  text-align: center;
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flexbox;
+  display: -ms-inline-flex;
+  display: inline-flex;
+}
+section.header nav ul a {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+section.header nav ul a:first-child {
+  margin-left: 0;
+}
+section.header nav ul a:last-child {
+  margin-right: 0;
+}
+section.header nav ul li {
+  color: #555555;
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+section.header nav ul li:hover {
+  color: #111111;
+}
+section.footer .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  width: 100%;
+  text-align: center;
+}
+section.footer .container a {
+  font-size: 14px;
+  margin-left: 6px;
+  margin-right: 6px;
+  opacity: 0.6;
+  -webkit-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+section.footer .container a:first-child {
+  margin-left: 0;
+}
+section.footer .container a:last-child {
+  margin-right: 0;
+}
+section.footer .container a:hover {
+  opacity: 0.8;
+}
+section.footer .container a .icon {
+  width: 16px;
+  height: 16px;
+}
+section.footer .container .copyright {
+  flex-grow: 0.5;
+  text-align: start;
+}
+section.footer .container .icons {
+  flex-grow: 0.5;
+  text-align: end;
+}
+section.main .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+}
+section.main .content {
+  color: #111111;
+  font-size: 16px;
+}
+section.main .content .title-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+}
+section.main .content .posts {
+  margin-bottom: 4em;
+}
+section.main .content .page-heading {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  text-transform: uppercase;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+  margin-bottom: 16px;
+}
+section.main .content .front-matter .page-heading {
+  margin-bottom: 0;
+}
+section.main .content .front-matter .meta {
+  font-size: 14px;
+  color: #666666;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  margin-bottom: 32px;
+}
+section.main .content .front-matter .date,
+section.main .content .front-matter .author,
+section.main .content .front-matter .tags,
+section.main .content .front-matter .word-count,
+section.main .content .front-matter .reading-time .middot {
+  display: none;
+}
+section.main .content .front-matter .middot {
+  font-size: 6px;
+  margin: 0 6px;
+  display: inline;
+  vertical-align: middle;
+}
+section.main .content .front-matter .middot:before {
+  content: "•";
+}
+section.main .content .front-matter .tags ul {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+section.main .content .front-matter .tags ul li {
+  -webkit-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+section.main .content .front-matter .tags ul li:hover {
+  opacity: 0.7;
+}
+section.main .content .front-matter .tags ul li a {
+  color: #666666;
+}
+section.main .container.f04 {
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+section.main .container.f04 .content {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+section.main .container.f04 .content .num {
+  margin: 30px 0px 30px 0;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 50px;
+}
+section.main .container.f04 .content .detail {
+  margin-bottom: 40px;
+}
+section.main .container .content .groupby {
+  margin-top: 1em;
+  padding-left: 0.5em;
+}
+section.main .container .content .post-item {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  display: list-item;
+  list-style: disc inside;
+}
+section.main .container .content .post-item .meta {
+  font-size: 14px;
+  color: #666666;
+  display: none;
+  min-width: 100px;
+}
+section.main .container .content .see-more {
+  font-style: italic;
+  float: right;
+  font-size: 0.9em;
+  margin-top: 2em;
+  color: #313537;
+}
+section.main .container .content .see-more:hover {
+  color: #666;
+}
+section {
+  padding: 0 16px;
+}
+section.header {
+  padding-top: 10px;
+}
+section.header-home {
+  padding-top: 36px;
+}
+section.main {
+  padding-top: 32px;
+}
+section.main .container .content .post-item .meta {
+    display: block;
+}
+section.main .container .content .post-item {
+    display: flex;
+    list-style: none;
+}
+a {
+  color: #428bca;
+  -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+a:hover {
+  color: #2a6496;
+}
+img {
+  max-width: 100%;
+}
+section.main .content {
+    width: 100%;
+}
+section.main .content .markdown {
+  font-size: 1.1em;
+  line-height: 1.75em;
+  color: #313537;
+  font-family: serif;
+  font-weight: 300;
+}
+section.main .content .markdown h1,
+section.main .content .markdown h2,
+section.main .content .markdown h3,
+section.main .content .markdown h4,
+section.main .content .markdown h5,
+section.main .content .markdown h6 {
+  font-size: 22px;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  font-weight: 700;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+  text-transform: none;
+  margin-top: 1.75rem;
+}
+section.main .content .markdown h1 {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+section.main .content .markdown h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+section.main .content .markdown h3 {
+  font-size: 1em;
+  margin-bottom: 1rem;
+}
+section.main .content .markdown h4,
+section.main .content .markdown h5,
+section.main .content .markdown h6 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: none;
+}
+section.main .content .markdown code,
+section.main .content .markdown pre {
+  font-family: 'Menlo', monospace;
+  font-size: 0.98rem;
+  background-color: #f7f7f7;
+}
+section.main .content .markdown code {
+  /* enclosed by single backtick (`) */
+  padding: .15em .5em;
+  border-radius: 2px;
+}
+section.main .content .markdown pre {
+  /* Hugo specific: consider using the 'highlight' shortcode */
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  line-height: 1.5em;
+  white-space: pre;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+@media (min-width: 769px) {
+  section.main .content .markdown pre {
+    width: 110%;
+    margin-left: -4%;
+  }
+}
+section.main .content .markdown pre code {
+  /* enclosed by 4 backticks (````) */
+  padding: 0;
+  font-size: 0.9rem;
+}
+section.main .content .markdown a code {
+  color: #428bca !important;
+}
+section.main .content .markdown a code:hover {
+  text-decoration: underline;
+}
+section.main .content .markdown p {
+  text-align: justify;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+section.main .content .markdown ul,
+section.main .content .markdown ol,
+section.main .content .markdown dl {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+section.main .content .markdown dt {
+  font-weight: bold;
+}
+section.main .content .markdown dd {
+  margin-bottom: .5rem;
+}
+section.main .content .markdown ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-bottom: 1.25rem;
+}
+section.main .content .markdown ol {
+  list-style-type: decimal;
+  margin-bottom: 1.25rem;
+}
+section.main .content .markdown li {
+  margin-left: 2em;
+}
+section.main .content .markdown em {
+  font-style: italic;
+}
+section.main .content .markdown strong {
+  font-weight: 700;
+}
+section.main .content .markdown hr {
+  position: relative;
+  margin: 1.75rem 0;
+  border: 0;
+  border-top: 1px solid #808080;
+  border-top: 1px solid #999999;
+}
+section.main .content .markdown abbr {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666666;
+  text-transform: uppercase;
+}
+section.main .content .markdown abbr[title] {
+  cursor: help;
+  border-bottom: 1px dotted #808080;
+}
+section.main .content .markdown blockquote {
+  padding: .5rem 1rem;
+  margin: .8rem 0;
+  color: #7a7a7a;
+  border-left: .25rem solid #e5e5e5;
+}
+section.main .content .markdown blockquote p:last-child {
+  margin-bottom: 0;
+}
+section.main .content .markdown figure {
+  width: 100%;
+  background: #fff;
+  margin-bottom: 1em;
+}
+section.main .content .markdown figure img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  position: static;
+  margin: auto;
+}
+section.main .content .markdown table {
+  margin-bottom: 1rem;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-collapse: collapse;
+}
+section.main .content .markdown td,
+section.main .content .markdown th {
+  padding: .25rem .5rem;
+  border: 1px solid #e5e5e5;
+}
+section.main .content .markdown tbody tr:nth-child(odd) td,
+section.main .content .markdown tbody tr:nth-child(odd) th {
+  background-color: #f7f7f7;
+}
+section.main .content .markdown .footnotes ol {
+  list-style-type: decimal;
+  margin-left: 16px;
+}
+section.main .content .markdown .footnotes li {
+  list-style-type: unset;
+}
+section.main .content .markdown .footnote-ref {
+  font-size: 0.7em;
+}
+section.main .content .navigation {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+section.main .content .navigation div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  margin-top: 1em;
+}
+section.main .content .navigation .icon {
+  width: 16px;
+  height: 16px;
+}
+section.main .content .navigation a {
+  width: 250px;
+  margin-left: 1em;
+  text-align: center;
+  font-style: italic;
+  color: #313537;
+}
+
+/* Fonts */
+
+.wf-raleway-n4-active body, 
+.wf-raleway-n4-active section.header nav ul li,
+.wf-raleway-n7-active section.main .content .page-heading,
+.wf-raleway-n2-active section.main .container.f04 .content .num,
+.wf-raleway-n7-active section.main .content .markdown h1,
+.wf-raleway-n7-active section.main .content .markdown h2,
+.wf-raleway-n7-active section.main .content .markdown h3,
+.wf-raleway-n7-active section.main .content .markdown h4,
+.wf-raleway-n7-active section.main .content .markdown h5,
+.wf-raleway-n7-active section.main .content .markdown h6 {
+  font-family: 'Raleway';
+}
+
+.wf-merriweather-n3-active section.main .content .markdown {
+  font-family: 'Merriweather';
+}
+
+.wf-ubuntu-mono-n4-active section.main .content .markdown code,
+.wf-ubuntu-mono-n4-active section.main .content .markdown pre {
+  font-family: 'Ubuntu Mono';
+}
+</style>
+<style media="(min-width: 600px)">
+  body {
+-webkit-justify-content: center;
+-moz-justify-content: center;
+-ms-justify-content: center;
+justify-content: center;
+}
+.non-narrow.zero-top-spacing {
+padding-top: 0 !important;
+}
+section {
+padding: 0 16px;
+margin-left: 100px;
+margin-right: 100px;
+max-width: 750px;
+}
+section.header {
+background-color: transparent;
+}
+section.header .container {
+-webkit-justify-content: flex-start;
+-moz-justify-content: flex-start;
+-ms-justify-content: flex-start;
+justify-content: flex-start;
+}
+section.header .container .logo {
+margin: 0;
+}
+section.header-home .container .logo {
+max-width: 180px;
+margin-left: 20px;
+}
+section.header-home .name-home {
+padding-top: 30px;
+font-size: 40px;
+}
+section.header-home nav ul li {
+font-size: 18px;
+}
+section.header .content {
+-webkit-align-items: flex-start;
+-moz-align-items: flex-start;
+-ms-align-items: flex-start;
+align-items: flex-start;
+}
+section.header .name {
+color: #333333;
+}
+section.header nav {
+font-size: 14px;
+margin-bottom: 0;
+}
+section.header nav ul {
+text-align: left;
+}
+section.header nav ul li {
+color: #666666;
+}
+section.header nav ul li:hover {
+color: #333333;
+}
+section.footer {
+background-color: transparent;
+}
+section.footer .container {
+flex-direction: row;
+}
+section.footer .container a {
+margin-left: 3px;
+margin-right: 3px;
+color: #666666;
+}
+section.footer .container a:hover {
+color: #333333;
+}
+section.footer .container a .icon {
+font-size: 18px;
+}
+section.footer .container a .icon.larger {
+font-size: 20px;
+}
+section.main .content .front-matter .date,
+section.main .content .front-matter .author,
+section.main .content .front-matter .tags,
+section.main .content .front-matter .word-count,
+section.main .content .front-matter .reading-time .middot {
+display: initial;
+}
+section.main .container.f04 {
+-webkit-justify-content: flex-start;
+-moz-justify-content: flex-start;
+-ms-justify-content: flex-start;
+justify-content: flex-start;
+}
+section.main .container.f04 .content {
+-webkit-align-items: flex-start;
+-moz-align-items: flex-start;
+-ms-align-items: flex-start;
+align-items: flex-start;
+}
+section.main .container.f04 .content .num {
+margin: 0 0 10px 0;
+font-size: 32px;
+}
+section.main .container.f04 .content .detail {
+margin-bottom: 30px;
+}
+.container {
+padding: 0 30px;
+}
+section.header {
+padding-top: 60px;
+padding-bottom: 60px;
+}
+section.footer {
+padding-top: 30px;
+padding-bottom: 60px;
+}
+section.main {
+padding-top: 0;
+}
+section.main .container .content .post-item {
+display: flex;
+list-style: none;
+padding-left: 1.5em;
+}
+section.main .container .content .post-item .meta {
+display: block;
+}
+section.main.post {
+padding-top: 60px;
+padding-bottom: 60px;
+}
+section.main .content .markdown blockquote {
+padding-right: 5rem;
+padding-left: 1.25rem;
+}
+section.main .content .navigation {
+-webkit-flex-direction: row;
+-moz-flex-direction: row;
+-ms-flex-direction: row;
+flex-direction: row;
+}
+section.main .content .navigation div {
+margin-top: 0em;
+}
+</style>
+<style media="(min-width: 769px)">
+  section.main .content .markdown figure {
+width: 110%;
+margin-left: -4%;
+}
+section.main .content .markdown img {
+max-width: 110%;
+width: 110%;
+margin-left: -4%;
+}
+</style>
+
+<noscript>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
+</noscript>
+
+
+  <style type="text/css" media="screen">
+    .hljs{display:block;background:white;padding:0.5em;color:#333333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-string,.hljs-variable,.hljs-template-variable,.hljs-strong,.hljs-emphasis,.hljs-quote{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-literal,.hljs-symbol,.hljs-bullet,.hljs-attribute{color:#0086b3}.hljs-section,.hljs-name{color:#63a35c}.hljs-tag{color:#333333}.hljs-title,.hljs-attr,.hljs-selector-id,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}
+  </style>
+
+
+
+
+
+  <style type="text/css" media="screen">
+    a {
+    color: #527fc1f;
+}
+
+a:hover {
+    color: #1a3152;
+}
+
+section.main .content .markdown, section.header .name, section.header nav ul li:hover {
+    color: #181d2a;
+}
+
+section.header nav ul li {
+    color: #6a7a8b;
+}
+
+section.main .content .markdown code {
+    background-color: #f9f9f9;
+    color: #527fc1f;
+}
+
+section.main .content .markdown pre, section.main .content .markdown pre code {
+    background-color: #282a36;
+    color: #87a5d2;
+}
+
+.hljs, .hljs-subst, .hljs-variable {
+    color: #87a5d2;
+}
+
+.hljs-type {
+    color: #97d28b;
+}
+
+.hljs-quote {
+    color: #ffcb8d;
+}
+
+.hljs-string, .hljs-number, .hljs-selector-id, .hljs-selector-class, .hljs-template-tag, .hljs-deletion {
+    color: #96c2d7;
+}
+
+.hljs-comment {
+    color: #6a7a8b;
+}
+
+.hljs-regexp, .hljs-symbol, .hljs-template-variable {
+    color: #ffcb8d;
+}
+
+.hljs-keyword, .hljs-attribute, .hljs-meta-keyword, .hljs-doctag, .hljs-name {
+    color: #97d28b;
+}
+
+.hljs-link, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-title, .hljs-section {
+    color: #ff8e91;
+}
+
+.hljs-built_in, .hljs-bullet, .hljs-code, .hljs-addition {
+    color: #97d28b;
+}
+  </style>
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://example.com/img/logo.png"
+
+>
+
+
+
+
+</head>
+
+
+    <body>
+
+        
+        <section class="header">
+            
+                <div class="container">
+                    
+                    <div class="content">
+                        <a href="https://example.com/"><div class="name"><h1>Max.Computer</h1></div></a>
+                        <nav>
+                            <ul>
+                                
+                                <a href="https://example.com/blog/"><li>Blog</li></a>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <a href="https://example.com/projects"><li>projects</li></a>
+                                
+                                
+                                
+                                
+                                
+                                <a href="https://example.com/about/"><li>About</li></a>
+                                
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    The perils of doing SICP on modern computers
+
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Fri Mar 4 2016 00:00:00 UTC">Mar 4, 2016</div>
+                    
+                        
+                    
+                    <div class="reading-time"><div class="middot"></div>8 minute read</div>
+                    <div class="tags">
+                        <ul>
+                          
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+    <script src="https://example.com/javascripts/deps/codemirror/lib/codemirror.js"></script>
+<script src="https://example.com/javascripts/deps/codemirror/mode/scheme/scheme.js"></script>
+<script src="https://example.com/javascripts/coding.js"></script>
+<script>
+  c = new CodingJS("/javascripts/");
+</script>
+
+<div id="deps">
+<code>
+(define (square x)
+  (* x x))
+  
+  
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) 
+         n)
+        ((divides? test-divisor n) 
+         test-divisor)
+        (else (find-divisor 
+               n 
+               (+ test-divisor 1)))))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+  (define (prime? n)
+  (= n (smallest-divisor n)))
+  
+
+
+(define (time f . args)
+  (newline)
+  (let ((start-time (runtime)))
+     (display (apply f args))
+     (display " *** ")
+     (display (- (runtime) start-time))))
+</code>
+</div>
+
+<script>
+  c.prompt("deps");
+</script>
+
+<p>I&rsquo;m going through <a href="https://en.wikipedia.org/wiki/Structure_and_Interpretation_of_Computer_Programs">SICP</a> with a reading group in Toronto (if you&rsquo;re in Toronto you should check us out at <a href="https://github.com/CompSciCabal/SMRTYPRTY">https://github.com/CompSciCabal/SMRTYPRTY</a>).</p>
+
+<p>As mind expanding as reading a seminal computer science text from the 80&rsquo;s is, sometimes you see the advantages of studying computers back when they ran at speeds comprehendable to mere mortals. For instance, in a memorable section, you implement a couple of primality tests, and then analyze their runtime complexity by finding successively larger prime numbers and seeing how long it takes.</p>
+
+<p>Here&rsquo;s SICP:</p>
+
+<blockquote>
+<p>Use your procedure to find the three smallest primes larger than 1000; larger than 10,000; larger than 100,000; larger than 1,000,000. Note the time needed to test each prime. Since the testing algorithm has order of growth of Θ(√n), you should expect that testing for primes around 10,000 should take about 10⎯⎯⎯⎯√10 times as long as testing for primes around 1000.</p>
+</blockquote>
+
+<p>Ha &mdash; I&rsquo;m timing in milliseconds, and it took me up to 10,000,000 to get the
+&ldquo;naive&rdquo; prime test to take a 1 millisecond.</p>
+
+<p>Things get worse when you implement a smarter (but probabilistic) primality test. The test is called Fermat&rsquo;s primality test. Again, SICP:</p>
+
+<blockquote>
+<p>The Θ(log⁡(n)) primality test is based on a result from number theory known as Fermat’s Little Theorem.45</p>
+
+<p>Fermat’s Little Theorem: If n is a prime number and a is any positive integer less than n, then a raised to the nth power is congruent to a modulo n.</p>
+
+<p>(Two numbers are said to be congruent modulo n if they both have the same remainder when divided by n. The remainder of a number aa when divided by n is also referred to as the remainder of a modulo n, or simply as a modulo n.)</p>
+
+<p>If n is not prime, then, in general, most of the numbers a &lt; n will not satisfy the above relation. This leads to the following algorithm for testing primality: Given a number n, pick a random number a &lt; n and compute the remainder of a^n modulo n. If the result is not equal to a, then nn is certainly not prime. If it is a, then chances are good that n is prime. Now pick another random number a and test it with the same method. If it also satisfies the equation, then we can be even more confident that n is prime. By trying more and more values of a, we can increase our confidence in the result. This algorithm is known as the Fermat test.</p>
+</blockquote>
+
+<p>And SICP&rsquo;s implementation is as follows</p>
+
+<div id="fast-prime">
+<code>
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (remainder
+          (square (expmod base (/ exp 2) m))
+          m))
+        (else
+         (remainder
+          (* base (expmod base (- exp 1) m))
+          m))))
+          
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+  
+(define (fast-prime? n times)
+  (cond ((= times 0) true)
+        ((fermat-test n)
+         (fast-prime? n (- times 1)))
+        (else false)))
+</code>
+</div>
+
+<script>
+ c.frozen_prompt("fast-prime", ["deps"]);
+</script>
+
+<p>We can compare the time it takes to do the naive version, vs the <code>fast-prime?</code> version.</p>
+
+<div id="prompt1">
+<code>
+(display "(prime? 100003)")
+(time prime? 100003)
+(newline)
+(display "(fast-prime? 100003 2)")
+(time fast-prime? 100003 2)
+(newline)
+(display "(prime? 1000037)")
+(time prime? 1000037)
+(newline)
+(display "(fast-prime? 1000037 2)")
+(time fast-prime? 1000037 2)
+
+</code>
+</div>
+
+<script>
+ c.prompt("prompt1", ["fast-prime", "deps"]);
+</script>
+
+<p>But then something interesting happens when we get to primes above 10,000,000 <strong>warning: this takes about 2 seconds for <code>prime</code> to run on my browser</strong>.</p>
+
+<div id="prompt2">
+<code>
+(display "(fast-prime? 10000000019 2)")
+(time fast-prime? 10000000019 2)
+(newline)
+(display "(prime? 10000000019)")
+(time prime? 10000000019)
+</code>
+</div>
+
+<script>
+ c.prompt("prompt2", ["fast-prime", "deps"]);
+</script>
+
+<p>Oh oh. Looks like our fast-prime test is <em>failing</em> on numbers around 10,000,000.
+It&rsquo;s a probabilistic test, but it&rsquo;s always going to be true for primes &mdash; that
+is the fermat&rsquo;s test is necessary but not sufficient to be a prime.</p>
+
+<p>The second argument to <code>fast-prime?</code> is how many times to run the test, and even
+though I understood the above, I still ran it with absurdly high numbers of
+iterations just to be sure.</p>
+
+<p>You might be wondering if 10000000019 is actually prime. A quick google led me to <a href="https://primes.utm.edu/curios/page.php/10000000019.html">https://primes.utm.edu/curios/page.php/10000000019.html</a> so at least we&rsquo;re not alone in thinking it&rsquo;s prime. (The fun fact about this prime listed on that site is that &ldquo;The sum of the digits of the smallest eleven-digit prime is eleven.&rdquo; Looks like they&rsquo;re digging deep for the curios here&hellip;)</p>
+
+<p>At this point I gave up on the whole endeavor, until I met with the reading
+group and found that <a href="https://twitter.com/j0ni">@j0ni</a> had the same exact issue!
+Neither of us could get the <code>fast-prime?</code> test to work on any numbers greater than 10,000,000.</p>
+
+<p>As an aside, we&rsquo;re both using <a href="http://www.call-cc.org/">Chicken Scheme</a>.</p>
+
+<p>The culprit is the <code>expmod</code> procedure. The Fermat test is that if a number p is prime, <code>(expmod a p p)</code> will be <code>a</code> for any <code>a</code> less than <code>p</code>.</p>
+
+<p>Running <code>(expmod 32 10000000019 10000000019)</code> on my machine, I get <code>5293704950.0</code>. That decimal point is a telltale sign that we blew past the maximum integer and got into float-land.</p>
+
+<p>I can modify the recursive <code>expmod</code> to print intermediate values:</p>
+
+<div id="print-expmod">
+<code>
+(define (expmod base exp m)
+  (let ((r (cond ((= exp 0) 1)
+                 ((even? exp)
+                  (remainder 
+                   (square (expmod base (/ exp 2) m))
+                   m))
+                 (else
+                  (remainder 
+                   (* base (expmod base (- exp 1) m))
+                   m)))))
+       (display "(expmod ")
+       (display base)
+       (display " ")
+       (display exp)
+       (display " ")
+       (display m)
+       (display ") ;=> ")
+       (display r)
+       (display "\n")
+       r))
+
+(expmod 32 10000000019 10000000019)
+</code>
+</div>
+<script>
+ c.prompt("print-expmod", ["deps"])
+</script>
+
+
+Things break down at `(expmod 32 18 10000000019)`
+
+When `expmod` is called with an even exponent, it recurs with `(remainder (square (expmod base (/ exp 2) m)) m)`. This is to use squaring and halving the exponent to get logarithmic growth.
+
+And indeed, if we perform the step directly for m = 18, we blow past the integers.
+
+<div id="remainder">
+<code>
+;;(remainder (square (expmod 32 (/ 18 2) 10000000019)) 10000000019)) 
+;; expands =>
+;;(remainder (square 4372021990) 10000000019)
+;; expands =>
+(square 4372021990)
+</code>
+</div>
+<script>
+ c.prompt("remainder", ["deps"])
+</script>
+
+And there you have it. The successive squaring blows past the max int, and we get into float-land, losing precision and giving us erroneous results for expmod.
+
+** Note in js the highest full precision number is 9007199254740991, wish there was a better way to illustrate it, like getting js to display it with an exponent **
+
+## Fixing it
+
+The first thing we can do is get rid of the squaring and halving part in expmod so we never get numbers that are too big:
+
+<div id="slow-expmod">
+<code>
+(define (slow-expmod base exp m)
+  (if (= exp 0)
+      1
+      (remainder 
+       (* base (slow-expmod base (- exp 1) m))
+       m)))
+</code>
+</div>
+<script>
+ c.prompt("slow-expmod", ["deps"])
+</script>
+
+
+You can try computing some values above, but unfortunately, `(slow-expmod 32 32 10000000019)` is slow enough to wear out my patience even on my "modern computer". The fact that we create 10000000019 stack frames certainly doesn't help.
+
+A better solution exists, all you have to do is, as SICP likes to say, observe that `ab mod p = (a mod p)(b mod p) mod p`. Instead of computing the square and then finding the remainder, we can write a remainder-aware `square` procedure that computes squares while taking the remainder of intermediate results.
+
+In an exercise, you're asked to make a fast multiply procedure that uses doubling and halving to ger O(log(n)) speed. We can use it to build a remainder-aware multiply procedure as a base of our remainder aware `sqaure`.
+
+My fast multiply is:
+
+<div id="fast-mult">
+<code>
+(define (fast-* a b)
+  (cond ((= b 0)
+         0)
+        ((even? b)
+         (fast-* (* a 2) (/ b 2)))
+        (else
+         (+ a (fast-* a (- b 1))))))
+</code>
+</div>
+<script>
+ c.frozen_prompt("fast-mult", ["deps"])
+</script>
+
+
+We can make this remainder-aware pretty easily:
+
+<div id="fast-mod">
+<code>
+(define (fast-modulo-* a b m)
+  (cond ((= b 0)
+         0)
+        ((even? b)
+         (fast-modulo-* (remainder (* a 2) m) (remainder (/ b 2) m) m))
+        (else
+         (remainder (+ (remainder a m)  (fast-modulo-* a (- b 1) m)) m))))
+         
+</code>
+</div>
+<script>
+ c.frozen_prompt("fast-mod", ["deps", "fast-mult"])
+</script>
+
+Giving us a `square-modulo`:
+
+<div id="square-mod">
+<code>
+(define (square-modulo a m)
+  (fast-modulo-* a a m))
+</code>
+</div>
+<script>
+ c.frozen_prompt("square-mod", ["deps", "fast-mod"])
+</script>
+
+Putting it into the `safe-expmod`, we get
+
+<div id="safe-expmod">
+<code>
+(define (safe-expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (square-modulo (safe-expmod base (/ exp 2) m) m))
+        (else
+          (fast-modulo-* base (safe-expmod base (- exp 1) m) m))))
+</code>
+</div>
+<script>
+ c.frozen_prompt("safe-expmod", ["deps", "square-mod"])
+</script>
+
+And it works!
+
+<div id="prompt3">
+<code>
+(safe-expmod 32 10000000019 10000000019)
+</code>
+</div>
+<script>
+ c.prompt("prompt3", ["deps", "safe-expmod"])
+</script>
+
+We can rewrite the Fermat test to use  `safe-expmod`:
+
+<div id="safe-fermat">
+<code>
+(define (safe-fermat-test n)
+  (define (try-it a)
+    (= (safe-expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(define (safe-fast-prime? n times)
+  (cond ((= times 0) #t)
+        ((safe-fermat-test n) 
+         (safe-fast-prime? n (- times 1)))
+        (else #f)))
+</code>
+</div>
+
+<script>
+ c.frozen_prompt("safe-fermat", ["deps", "safe-expmod"])
+</script>
+
+<p>And lo and behold:</p>
+
+<p><div id="prompt4">
+<code>
+(safe-fast-prime? 10000000019 2)
+</code>
+</div>
+<script>
+ c.prompt(&ldquo;prompt4&rdquo;, [&ldquo;deps&rdquo;, &ldquo;safe-fermat&rdquo;])
+</script></p>
+
+
+                <br>
+            </div>
+            
+                <div class="navigation">
+                    
+                    <div>
+                        <img class="icon" src="https://example.com/img/back.svg" alt="back" />
+                        <a href="https://example.com/blog/last-days-of-the-pirate-bay/">Last Days of The Pirate Bay</a>
+                    </div>
+                    
+                    <div style="width: 100%;"></div>
+                    
+                </div>
+            
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="footer">
+    <div class="container">
+        <div class="copyright">
+
+        
+            <a href="https://example.com/license">Copyright © 2012-2017 Max Veytsman</a>
+        
+
+        </div>
+        <div class="icons">
+
+        
+            <a href="https://github.com/mveytsman" target="_blank">
+                <img class="icon" src="https://example.com/img/github.svg" alt="github" />
+            </a>
+        
+
+        
+            <a href="https://twitter.com/mveytsman" target="_blank">
+                <img class="icon" src="https://example.com/img/twitter.svg" alt="twitter" />
+            </a>
+        
+
+        
+            <a href="https://www.linkedin.com/in/max-veytsman-239a2432" target="_blank">
+                <img class="icon" src="https://example.com/img/linkedin.svg" alt="linkedin" />
+            </a>
+        
+
+        
+            <a href="mailto:maxim@ontoillogical.com">
+                <img class="icon" src="https://example.com/img/email.svg" alt="email" />
+            </a>
+        
+
+        
+            <a href="https://example.com/index.xml">
+                <img class="icon" src="https://example.com/img/rss.svg" alt="rss" />
+            </a>
+        
+
+        </div>
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Raleway:400,600,700', 'Merriweather:300,300i,700,700i', 'Ubuntu+Mono:400,700']
+    }
+  });
+</script>
+
+
+  <script src="https://example.com/js/highlight.min.js" defer></script>
+  
+
+
+
+
+
+
+<script>
+  window.onload = function() {
+    
+      hljs.initHighlighting();
+    
+    
+  };
+</script>
+
+
+</body>
+</html>
+

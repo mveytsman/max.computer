@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max.Computer</title>
+    <link>https://example.com/</link>
+    <description>Recent content on Max.Computer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2012-2017 Max Veytsman</copyright>
+    <lastBuildDate>Fri, 04 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gemcanary</title>
+      <link>https://example.com/projects/gemcanary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/gemcanary/</guid>
+      <description>After the Ruby security apocalypse, we had to figure out if any of our projects at State Machinery were vulnerable and patch them. We realized that manually checking Gemfiles for vulnerable versions was tedious and prone to error, so we built Gemcanary to monitor your Gemfiles and email you if any vulnerabilities came out.
+Gemcanary was designed as a free service to drive traffic to our consultancy, but after a few years we realized that focusing on commercializing the product was the right move and wound down the consultancy to focus on our current canary-themed venture, Appcanary.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://example.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/about/</guid>
+      <description>Hello!
+My name is Max Veytsman afsdf dd</description>
+    </item>
+    
+    <item>
+      <title>The perils of doing SICP on modern computers</title>
+      <link>https://example.com/blog/the-perils-of-doing-sicp-on-modern-computers/</link>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/the-perils-of-doing-sicp-on-modern-computers/</guid>
+      <description>c = new CodingJS(&#34;/javascripts/&#34;);   (define (square x) (* x x)) (define (smallest-divisor n) (find-divisor n 2)) (define (find-divisor n test-divisor) (cond (( (square test-divisor) n) n) ((divides? test-divisor n) test-divisor) (else (find-divisor n (+ test-divisor 1))))) (define (divides? a b) (= (remainder b a) 0)) (define (prime? n) (= n (smallest-divisor n))) (define (time f . args) (newline) (let ((start-time (runtime))) (display (apply f args)) (display &#34;</description>
+    </item>
+    
+    <item>
+      <title>Last Days of The Pirate Bay</title>
+      <link>https://example.com/blog/last-days-of-the-pirate-bay/</link>
+      <pubDate>Fri, 12 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/last-days-of-the-pirate-bay/</guid>
+      <description>I&amp;rsquo;ll be showing my BitTorrent video collage at Long Winter tonight.
+$ cat last-days.nfo __ __ ____ ____ / / ____ ______/ /_ / __ \____ ___ _______ ____ / __/ / / / __ `/ ___/ __/ / / / / __ `/ / / / ___/ / __ \/ /_ / /___/ /_/ (__ ) /_ / /_/ / /_/ / /_/ (__ ) / /_/ / __/ /_____/\__,_/____/\__/ /_____/\__,_/\__, /____/ \____/_/ /____/ ________ ____ _ __ ____ /_ __/ /_ ___ / __ \(_)________ _/ /____ / __ )____ ___ __ / / / __ \/ _ \ / /_/ / / ___/ __ `/ __/ _ \ / __ / __ `/ / / / / / / / / / __/ / ____/ / / / /_/ / /_/ __/ / /_/ / /_/ / /_/ / /_/ /_/ /_/\___/ /_/ /_/_/ \__,_/\__/\___/ /_____/\__,_/\__, / /____/ Last Days of The Pirate Bay On December 9th, Swedish police raided a datacenter in Stockholm and seized the servers that run The Pirate Bay, shutting down the world&#39;s most notorious and popular piracy site.</description>
+    </item>
+    
+    <item>
+      <title>Solving the Expression Problem in Clojure</title>
+      <link>https://example.com/blog/solving-the-expression-problem-in-clojure/</link>
+      <pubDate>Sat, 18 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/solving-the-expression-problem-in-clojure/</guid>
+      <description>Last night, I was having a drink with a friend and he asked me what I liked about Clojure. Immutable data structures are coming in vogue outside Clojure, and they don&amp;rsquo;t need to be sold very hard. I don&amp;rsquo;t know a lot about virtual machine optimization, but I&amp;rsquo;ve always been swayed by the argument that with the amount of dollars and intellectual effort spent on JVM optimization in the past decades, it&amp;rsquo;s pretty fast.</description>
+    </item>
+    
+    <item>
+      <title>How to take over the computer of any Java (or Clojure or Scala) developer</title>
+      <link>https://example.com/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</link>
+      <pubDate>Mon, 28 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</guid>
+      <description>Update: 07/31/2014
+Sonatype has reacted to this post and will soon be turning on SSL access for all users. Their blog post announcing this is here. I&amp;rsquo;m very happy that they are making this change, and the Java ecosystem is going to be more secure for it!
+That being said, if you&amp;rsquo;re reading this and are thinking of charging $10 to gauge the true demand for security features in your product, don&amp;rsquo;t.</description>
+    </item>
+    
+    <item>
+      <title>Delimited Continuations in Ruby Part 2: Generators and Coroutines</title>
+      <link>https://example.com/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</link>
+      <pubDate>Mon, 21 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</guid>
+      <description>Last time, I showed some basic things you can do with delimited continuations. If you&amp;rsquo;re still confused about them (as I am!) another good tutorial is here.
+Let&amp;rsquo;s dive right in and build some more complicated control structures!
+Generators Let&amp;rsquo;s start by building what Python calls &amp;ldquo;Generators.&amp;rdquo; Ruby has Enumerators, which are pretty similar, but I&amp;rsquo;ll call it a generator in order to differentiate my implementation from the Ruby core.</description>
+    </item>
+    
+    <item>
+      <title>Delimited Continuations in Ruby Part 1</title>
+      <link>https://example.com/blog/delimited-continuations-in-ruby-part-1/</link>
+      <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/delimited-continuations-in-ruby-part-1/</guid>
+      <description>For the past few days at Hacker School, I&amp;rsquo;ve been exploring continuations. Continuations are hard to describe. Basically, a continuation represents the execution state of a program at a point. Capturing the continuation and invoking it later allows you to come back to that point in the programs execution. Continuations can be used to implement complicated control flow constructs.
+If that was complicated, here&amp;rsquo;s a sandwich metaphor from Luke Palmer:</description>
+    </item>
+    
+    <item>
+      <title>Doorbot Overflow</title>
+      <link>https://example.com/blog/doorbot-overflow/</link>
+      <pubDate>Thu, 03 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/doorbot-overflow/</guid>
+      <description>Today was presentation day at Hacker School. I have a 10 minute talk about &amp;ldquo;building a better doorbot&amp;rdquo; which was secretly a talk about exploiting stack buffer overflows. People seemed to enjoy it.
+The slides are available here, and the source code is here.</description>
+    </item>
+    
+    <item>
+      <title>Hacker School: The First Three Weeks</title>
+      <link>https://example.com/blog/hacker-school-the-first-three-weeks/</link>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/hacker-school-the-first-three-weeks/</guid>
+      <description>For three weeks now, I&amp;rsquo;ve been at Hacker School. Hacker School is hard to describe, they call themselves a &amp;ldquo;writer&amp;rsquo;s retreat for programmers.&amp;rdquo; Personally I prefer &amp;ldquo;programmer summer camp,&amp;rdquo; mostly because I have no idea what writer&amp;rsquo;s retreats are like. Basically it&amp;rsquo;s a collection of people working in a self-directed way to improve their skills as programmers. They accept people of all skill levels, as long as you have programmed before.</description>
+    </item>
+    
+    <item>
+      <title>On Functional Testing</title>
+      <link>https://example.com/blog/on-functional-testing/</link>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/on-functional-testing/</guid>
+      <description>Next Steps Refactor The core of my emulator is a parser that parses a 16-bit MSP430 instruction, and then dispatches to the correct function. The meat is then an implementation of the instruction set, with each instruction being a function that takes a computer state along with some arguments and retruns a computer state after applying the function. I use a multimethod to dispatch on the OP name.
+For instance below is the implemtation of push.</description>
+    </item>
+    
+    <item>
+      <title>How to locate any Tinder user</title>
+      <link>https://example.com/blog/how-to-locate-any-tinder-user/</link>
+      <pubDate>Tue, 25 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/how-to-locate-any-tinder-user/</guid>
+      <description>You can also find this post on my consultancy&amp;rsquo;s blog here
+Last fall, while performing some bespoke security research for one of our clients, I found a way to locate any Tinder user using trilateration. Here&amp;rsquo;s what the proof of concept looks like:
+I did a guest post over at the Include Security blog about how I was able to track the location of any Tinder user.</description>
+    </item>
+    
+    <item>
+      <title>Thoughts on BsidesTO</title>
+      <link>https://example.com/blog/thoughts-on-bsidesto/</link>
+      <pubDate>Sat, 30 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/thoughts-on-bsidesto/</guid>
+      <description>Last month, I helped organize a security conference in Toronto called BsidesTO. I&amp;rsquo;ve attended and volunteered at my fair share of conferences, but this is the first time I&amp;rsquo;ve had an integral role in throwing and event of this scale.
+One day, two floors, 14 speakers, and over 150 attendees. It was a blast. An exhausting blast.
+Bsides. is a brand for security conferences around the world.
+ What is BSides?</description>
+    </item>
+    
+    <item>
+      <title>Hacking Letterpress</title>
+      <link>https://example.com/blog/hacking-letterpress/</link>
+      <pubDate>Fri, 09 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/hacking-letterpress/</guid>
+      <description>You can also find this post on my consultancy&amp;rsquo;s blog here
+Letterpress is an iOS game that came out a few weeks ago and immediately became popular enough to take down Apple&amp;rsquo;s GameCenter. It&amp;rsquo;s a cross between Scrabble and Go. The game is played on a board made out of 25 letters and players take turns building words in order to capture the letters they use.
+I was hopelessly addicted to Letterpress until I figured out how to win consistently.</description>
+    </item>
+    
+    <item>
+      <title>Breaking in and out of Vagrant</title>
+      <link>https://example.com/blog/breaking-in-and-out-of-vagrant/</link>
+      <pubDate>Wed, 31 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/breaking-in-and-out-of-vagrant/</guid>
+      <description>**You can also find this post on my consultancy&amp;rsquo;s blog here **
+Vagrant is a great tool that allows you to easily spawn and configure lightweight VMs to use as development environments. Vagrant provides base installs of several flavours of Linux, and takes care of setting up networking and shared folders for you.
+Vagrant is really useful for managing your development environment, and I highly recommend it. If you&amp;rsquo;re doing a lot of development, you might need to be running all kinds of application and database servers on your machine, and it&amp;rsquo;s probably a much better idea to run them in a VM rather than on your host machine.</description>
+    </item>
+    
+    <item>
+      <title>My solutions to the Stripe CTF (web app edition)</title>
+      <link>https://example.com/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</link>
+      <pubDate>Thu, 30 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</guid>
+      <description>You can also find this post on my consultancy&amp;rsquo;s blog here
+Stripe recently ran a CTF focused on web application hacking. It ended yesterday, and I decided to write up my solutions. If you have any questions or find a bug in my solutions, you can reach me at max [at] state.io.
+First of all, I had an great time solving these challenges. Big thanks to the Stripe team for creating such a fun game.</description>
+    </item>
+    
+    <item>
+      <title>Appcanary</title>
+      <link>https://example.com/projects/appcanary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/appcanary/</guid>
+      <description>In 2015, we transitioned our consultancy into a product company and I switched my title from the ambiguous &amp;ldquo;partner&amp;rdquo; to the equally ambiguous but more startupy &amp;ldquo;founder.&amp;rdquo;
+Appcanary tracks vulnerabilities in open source software, and notifies you if one of your dependencies needs to be upgraded. We were part of Y Combinator in the summer of 2015, and I&amp;rsquo;ve been writing code and talking to users ever since.</description>
+    </item>
+    
+    <item>
+      <title>Dilettante</title>
+      <link>https://example.com/projects/dilettante/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/dilettante/</guid>
+      <description>The main public repository for Java-ecosystem packages is Maven Central. I discovered that when you installed Java packages using a tool like maven or ant, they were served unencrypted over HTTP, without any sort of cryptographic verification of their contents. Anyone who has control over a wifi router could trick Java developers into downloading compromised Jars and run arbitrary code on their systems.
+I tried asking the company that runs Maven Central nicely to change this, but they didn&amp;rsquo;t budge.</description>
+    </item>
+    
+    <item>
+      <title>Last Days of Pirate Bay</title>
+      <link>https://example.com/projects/piratebay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/piratebay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>State Machinery</title>
+      <link>https://example.com/projects/stateio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/stateio/</guid>
+      <description>For two and a half years, I ran a boutique consultancy. We provided a mix of security and development services, meaning that on any given day I could be developing and MVP, hacking into someone&amp;rsquo;s network, or debugging legacy software.</description>
+    </item>
+    
+    <item>
+      <title>Tinder Finder</title>
+      <link>https://example.com/projects/tinder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/projects/tinder/</guid>
+      <description>I discovered that Tinder would return distances between users with extremely high precision. This is a problem because it allows you to deduce the exact location of a Tinder user by measuring their distance to three known points (this is called trilateration).
+I made a demo application to geolocate Tinder users in order to demonstrate to Tinder how serious of an issue this was. They fixed the problem, and afterwards I disclosed it publicly.</description>
+    </item>
+    
+  </channel>
+</rss>
