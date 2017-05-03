@@ -12,7 +12,7 @@ that came out a few weeks ago and immediately became popular enough to [take dow
 
 I was hopelessly addicted to Letterpress until I figured out how to win consistently.
 
-![winning](/assets/images/letterpress/winning.png)
+![winning](/img/letterpress/winning.png)
 
 As it turns out, letterpress's dictionary is stored on the device. By simply adding words to Letterpress's dictionary, you can register any
 combination of letters as a valid word. 
@@ -56,7 +56,7 @@ Here's how it works:
 
 ## Is this a word?
 
-![Before](/assets/images/letterpress/before.png)
+![Before](/img/letterpress/before.png)
 
 ## Shucks!
 
@@ -73,6 +73,6 @@ Here's how it works:
  [+] Successfully added word szug.  You can play it now!
 ```
 ## Let's try again
-![After](/assets/images/letterpress/after.png)
+![After](/img/letterpress/after.png)
 
 You can find the app [here](https://github.com/stateio/letterpress-lexicographer).  Please enjoy responsibly.

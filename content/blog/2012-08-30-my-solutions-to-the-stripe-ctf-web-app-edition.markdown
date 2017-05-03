@@ -28,7 +28,7 @@ db.all(query, namespace, function(err, secrets) { //...
 
 By querying the site for secrets in the namespace of `%`, you cause the SQL query that is executed to evaluate to `SELECT * FROM secrets WHERE key LIKE %.%` which of course will spit out every secret stored in every namespace, including the password.
 
-![Level 0 Solved](/assets/images/stripe-ctf/level0-solved.png)
+![Level 0 Solved](/img/stripe-ctf/level0-solved.png)
 
 Level 1
 -------
@@ -57,13 +57,13 @@ The problem is `extract($_GET)` on line 3.  `extract` will take a hash and load 
 
 There are a lot of ways to do this, but I found it most natural to choose a filename that doesn't exist, and supply an empty string as my guess.  Because the script doesn't really deal with errors, this will result in a correct attempt.  My final querystring was `attempt=&filename=DOESNOTEXIT`
 
-![Level 1 Solved](/assets/images/stripe-ctf/level1-solved.png)
+![Level 1 Solved](/img/stripe-ctf/level1-solved.png)
 
 Level 2
 -------
 Level 2 presents you with a "social network," where you have the opportunity to upload your avatar image.  The password for the next level is stored in a text file on the server.  As it turns out, you can upload any kind of file you want, not just images.  And this includes PHP files, which the server will happily execute when you navigate to the URL of the uploaded script.  You can even get a handy directory listing:
 
-![Level 2 Directory Listing](/assets/images/stripe-ctf/level2-directory_listing.png)
+![Level 2 Directory Listing](/img/stripe-ctf/level2-directory_listing.png)
 
 Above you can see a bunch of files that I uploaded, and even a false attempt at the challenge.  Having a place to dump scripts and other files is going to come in handy for the later challenges.
 
@@ -110,7 +110,7 @@ Level 4
 -------
 Level 4 is a karma trading game.  You register as a user, and then can transfer karma to other users in the game.  To keep things honest, if a user transfers you karma, you also get to see their password. 
 
-![Level 4](/assets/images/stripe-ctf/level4.png)
+![Level 4](/img/stripe-ctf/level4.png)
 
 The user karma_fountain's password is the password to the next level, so if karma_fountain gives you karma, you also get the password to the next level.  
 
@@ -120,7 +120,7 @@ The only user supplied value that other users can see is our password after we g
 
 Transferring karma to karma_trader from attacker completes the challenge:
 
-![Level 4 Solved](/assets/images/stripe-ctf/level4-solved.png)
+![Level 4 Solved](/img/stripe-ctf/level4-solved.png)
 
 Level 5
 -------
@@ -151,7 +151,7 @@ The `params` variable in Sinatra contains both POSTed data and values in the que
 
 As a sidenote, after solving this challenge the first time, when I came back to gather screenshots, I found that I could authenticate to the level 5 domain, but was no longer shown the password:
 
-![Level 5 Solved?](/assets/images/stripe-ctf/level5-solved.png)
+![Level 5 Solved?](/img/stripe-ctf/level5-solved.png)
 
 If anyone knows why I didn't see a password the second time around, please tell me!
 
@@ -292,7 +292,7 @@ $.get('user_info', function (data) {
 ```
 And when the above is encoded with `String.fromCharCode` and put inside a `<script>` tag, the target user will post their password when viewing our post:
 
-![Level 6 Solved](/assets/images/stripe-ctf/level6-solved.png)
+![Level 6 Solved](/img/stripe-ctf/level6-solved.png)
 
 Level 7
 -------
@@ -301,7 +301,7 @@ Level 7 is WaffleCopter, an API for the delivery of waffles by helicopter.  When
 
 An order is a post request with a signature, and you can view your previous orders and the orders of other users by navigating to "/logs/USERID".
 
-![Level 7 Orders](/assets/images/stripe-ctf/level7-orders-1.png)
+![Level 7 Orders](/img/stripe-ctf/level7-orders-1.png)
 
 This is an order log for another user.  We know that this user is a premium subscriber because they are ordering the Dream waffle which is a premium item like the Liège waffles we have to order.
 
@@ -322,7 +322,7 @@ The signature algorithm used by WaffleCopter is `sha1(SECRET + MESSAGE)`, so we 
 
 I found a handy script to perform a SHA1 padding attack [here](http://www.vnsecurity.net/2010/03/codegate_challenge15_sha1_padding_attack/).
 
-![Level 7 SHA1 Padding Attack](/assets/images/stripe-ctf/level7-padding.png)
+![Level 7 SHA1 Padding Attack](/img/stripe-ctf/level7-padding.png)
 
 Running it I was able to generate a new message and signature, and submitting that allowed me to order the Liège Waffle.
 
@@ -456,7 +456,7 @@ echo "<pre>$output</pre>";
 ?>
 ```
 
-![Level 8 Shell](/assets/images/stripe-ctf/level8-shell.png)
+![Level 8 Shell](/img/stripe-ctf/level8-shell.png)
 
 To brute force the password chunk by chunk, we send two requests with the same guess to PasswordDB and look at the difference in source ports between responses to our webhook.  If the difference when guessing the first chunk is 3, then PasswordDB made 2 requests between responding to us, and thus queried the 2nd chunk server.  Likewise if the difference when guessing the 2nd chunk is 4, and guessing the 3rd chunk is 5.  I found that due to what's probably other users on the same challenge, I would sometimes get source port differences that were wildly off.  I solved this sub optimally: any time that I have a source port difference greater than what I expect I wait 5 seconds and try again.  If I keep getting source port differences greater than the expected 5 times in a row, I probably correctly guessed a chunk.  This is a very suboptimal way to do it, and my script took a couple of hours to finish.
 
@@ -540,4 +540,4 @@ The End
 -------
 And there you have it.
 
-![The End](/assets/images/stripe-ctf/the-end.png)
+![The End](/img/stripe-ctf/the-end.png)

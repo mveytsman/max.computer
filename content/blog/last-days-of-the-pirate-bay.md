@@ -65,4 +65,4 @@ passage, Nicolas Maigret who I shamelessly stole from, Long Winter for
 letting me do this.
 ```
 
-![Last Days of The Pirate Bay](/assets/images/last-days/last-days.png)
+![Last Days of The Pirate Bay](/img/last-days/last-days.png)
