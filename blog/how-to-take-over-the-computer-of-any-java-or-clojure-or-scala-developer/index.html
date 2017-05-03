@@ -1043,13 +1043,13 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
 
 <p>The other day I started hacking on a Clojure project of mine, when I saw my firewall display this:</p>
 
-<p>{% img /assets/images/dilettante/firewall.png 500 %}</p>
+<p><img src="http://max.computer/img/dilettante/firewall.png" alt="firewall" /></p>
 
 <p>I&rsquo;m downloading clojure.jar from <a href="http://repo.maven.apache.org">http//repo.maven.apache.org</a> over port 80! This means that I&rsquo;m going to be downloading JARs over unencrypted http. I thought this was an <a href="https://github.com/technomancy/leiningen/issues/1604">issue</a> with <a href="http://leiningen.org/">leiningen</a> at first. As it turns out it&rsquo;s not lein&rsquo;s fault at all. Clojure.jar, and a whole lot of other JARs that are important in the Java/Clojure/Scala/etc world are officially hosted on <a href="http://search.maven.org/">Maven Central</a>, which is a public service provided by <a href="http://www.sonatype.com/">Sonatype</a>. Sonatype has a policy that they only allow SSL access to people who have authentication tokens. <strong>In order to get an authentication token and SSL access, you need to donate $10 to the Apache foundation.</strong> If you don&rsquo;t believe me, the donate page is <a href="http://www.sonatype.com/clm/secure-access-to-central">here</a>, and the blog post announcing this policy is <a href="http://www.sonatype.com/clm/secure-access-to-central">here</a>. They even mention man-in-the-middle attacks on it.</p>
 
 <p>Because authentication tokens are issued per user/organization, tools like maven and leiningen can&rsquo;t bundle authentication tokens. If you&rsquo;re pulling down some Java project and installing its dependencies, you&rsquo;re not going over SSL. This policy was confirmed by a Sonatype employee when I got into a twitter tiff about this:</p>
 
-<p>{% img /assets/images/dilettante/tweet.png 500 %}</p>
+<p><img src="http://max.computer/img/dilettante/tweet.png" alt="tweet" /></p>
 
 <p>Unless you take very careful steps that involve paying someone $10, JARs you download can be man-in-the-middled, and code you execute on your system can be replaced by malware.</p>
 
@@ -1061,11 +1061,11 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
 
 <p>Proxying HTTP traffic through dilettante will backdoor any JARs downloaded from maven central. The backdoored version will retain their functionality, but display a nice message to the user when they use the library. You can see the video below:</p>
 
-<p>{% video  <a href="http://blog.ontoillogical.com/assets/files/dilettante_screencast.mp4">http://blog.ontoillogical.com/assets/files/dilettante_screencast.mp4</a> 800 %}</p>
+<video width="100%" controls="" poster=""><source src="http://max.computer/files/dilettante_screencast.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
 
 <p>Or a screenshot:</p>
 
-<p>{% img /assets/images/dilettante/screen.png 800 %}</p>
+<p><img src="http://max.computer/img/dilettante/screen.png" alt="screen" /></p>
 
 <p>You can find the code <a href="https://github.com/mveytsman/dilettante">here</a></p>
 

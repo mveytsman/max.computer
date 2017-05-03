@@ -1004,20 +1004,28 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
 <section class="main">
     <div class="container">
         <div class="content">
-            <div class="page-heading">
+            <div class="posts">
+                <div class="page-heading">About</div>
+                <div style="display: flex; align-items: flex-start;">
+                    <div>
+                        <ul>
+<li>Name: Max Veytsman</li>
+<li>Age: <span id="age"></span> days</li>
+<li>Employment: <a href="https://appcanary.com">Appcanary</a></li>
+<li>Schooling (Computer Science): <a href="https://www.utoronto.ca/">University of Toronto</a></li>
+<li>Schooling (Capitalism): <a href="https://www.ycombinator.com/">Y Combinator</a></li>
+<li>Unschooling: <a href="https://recurse.com">Recurse Center</a></li>
+<li>Twitter: <a href="https://twitter.com/mveytsman">yes</a></li>
+<li>Github: <a href="https://github.com/mveytsman">yes</a></li>
+<li>Keybase: <a href="https://keybase.io/mveytsman">yes</a></li>
+<li>Linkedin: <a href="https://www.linkedin.com/in/max-veytsman-239a2432/">if you insist</a></li>
+</ul>
 
-    About
-
-</div>
-
-            <div class="markdown">
-                
-    <p>Hello!</p>
-
-<p>My name is Max Veytsman
- afsdf dd</p>
-
-
+                    </div>
+                    <div>
+                        <img src="https://avatars2.githubusercontent.com/u/34720?v=3%22 ">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1097,4 +1105,11 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
 
 </body>
 </html>
+
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+     document.getElementById("age").innerHTML = Math.round((new Date() - new Date(1988,01,05)) / (1000*60*60*24))
+ });
+</script>
 

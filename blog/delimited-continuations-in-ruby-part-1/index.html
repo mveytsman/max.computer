@@ -1078,21 +1078,20 @@ puts &quot;i is #{i}&quot;
 
 <p>We can even build a reverse GOTO (known as the COMEFROM, implementation courtesy of <a href="https://en.wikipedia.org/wiki/COMEFROM#Practical_uses">Wikipedia</a>).</p>
 
-<p>{% codeblock ruby %}
-$come_from_labels = {}</p>
-
-<p>def label(l)
+<pre><code class="language-ruby">$come_from_labels = {}
+ 
+def label(l)
     if $come_from_labels[l]
         $come_from_labels[l].call
     end
-end</p>
-
-<p>def come_from(l)
+end
+ 
+def come_from(l)
     callcc do |block|
         $come_from_labels[l] = block
     end
 end
-{% endcodeblock %}</p>
+</code></pre>
 
 <h2 id="problems-abound">Problems Abound</h2>
 

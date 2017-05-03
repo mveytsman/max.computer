@@ -1053,7 +1053,7 @@ db.all(query, namespace, function(err, secrets) { //...
 
 <p>By querying the site for secrets in the namespace of <code>%</code>, you cause the SQL query that is executed to evaluate to <code>SELECT * FROM secrets WHERE key LIKE %.%</code> which of course will spit out every secret stored in every namespace, including the password.</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level0-solved.png" alt="Level 0 Solved" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level0-solved.png" alt="Level 0 Solved" /></p>
 
 <h2 id="level-1">Level 1</h2>
 
@@ -1081,13 +1081,13 @@ db.all(query, namespace, function(err, secrets) { //...
 
 <p>There are a lot of ways to do this, but I found it most natural to choose a filename that doesn&rsquo;t exist, and supply an empty string as my guess.  Because the script doesn&rsquo;t really deal with errors, this will result in a correct attempt.  My final querystring was <code>attempt=&amp;filename=DOESNOTEXIT</code></p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level1-solved.png" alt="Level 1 Solved" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level1-solved.png" alt="Level 1 Solved" /></p>
 
 <h2 id="level-2">Level 2</h2>
 
 <p>Level 2 presents you with a &ldquo;social network,&rdquo; where you have the opportunity to upload your avatar image.  The password for the next level is stored in a text file on the server.  As it turns out, you can upload any kind of file you want, not just images.  And this includes PHP files, which the server will happily execute when you navigate to the URL of the uploaded script.  You can even get a handy directory listing:</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level2-directory_listing.png" alt="Level 2 Directory Listing" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level2-directory_listing.png" alt="Level 2 Directory Listing" /></p>
 
 <p>Above you can see a bunch of files that I uploaded, and even a false attempt at the challenge.  Having a place to dump scripts and other files is going to come in handy for the later challenges.</p>
 
@@ -1133,7 +1133,7 @@ flask.session['user_id'] = user_id
 
 <p>Level 4 is a karma trading game.  You register as a user, and then can transfer karma to other users in the game.  To keep things honest, if a user transfers you karma, you also get to see their password.</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level4.png" alt="Level 4" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level4.png" alt="Level 4" /></p>
 
 <p>The user karma_fountain&rsquo;s password is the password to the next level, so if karma_fountain gives you karma, you also get the password to the next level.</p>
 
@@ -1143,7 +1143,7 @@ flask.session['user_id'] = user_id
 
 <p>Transferring karma to karma_trader from attacker completes the challenge:</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level4-solved.png" alt="Level 4 Solved" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level4-solved.png" alt="Level 4 Solved" /></p>
 
 <h2 id="level-5">Level 5</h2>
 
@@ -1173,7 +1173,7 @@ end
 
 <p>As a sidenote, after solving this challenge the first time, when I came back to gather screenshots, I found that I could authenticate to the level 5 domain, but was no longer shown the password:</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level5-solved.png" alt="Level 5 Solved?" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level5-solved.png" alt="Level 5 Solved?" /></p>
 
 <p>If anyone knows why I didn&rsquo;t see a password the second time around, please tell me!</p>
 
@@ -1311,7 +1311,7 @@ end
 
 <p>And when the above is encoded with <code>String.fromCharCode</code> and put inside a <code>&lt;script&gt;</code> tag, the target user will post their password when viewing our post:</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level6-solved.png" alt="Level 6 Solved" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level6-solved.png" alt="Level 6 Solved" /></p>
 
 <h2 id="level-7">Level 7</h2>
 
@@ -1319,7 +1319,7 @@ end
 
 <p>An order is a post request with a signature, and you can view your previous orders and the orders of other users by navigating to &ldquo;/logs/USERID&rdquo;.</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level7-orders-1.png" alt="Level 7 Orders" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level7-orders-1.png" alt="Level 7 Orders" /></p>
 
 <p>This is an order log for another user.  We know that this user is a premium subscriber because they are ordering the Dream waffle which is a premium item like the Liège waffles we have to order.</p>
 
@@ -1339,7 +1339,7 @@ end
 
 <p>I found a handy script to perform a SHA1 padding attack <a href="http://www.vnsecurity.net/2010/03/codegate_challenge15_sha1_padding_attack/">here</a>.</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level7-padding.png" alt="Level 7 SHA1 Padding Attack" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level7-padding.png" alt="Level 7 SHA1 Padding Attack" /></p>
 
 <p>Running it I was able to generate a new message and signature, and submitting that allowed me to order the Liège Waffle.</p>
 
@@ -1470,7 +1470,7 @@ echo &quot;&lt;pre&gt;$output&lt;/pre&gt;&quot;;
 ?&gt;
 </code></pre>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/level8-shell.png" alt="Level 8 Shell" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/level8-shell.png" alt="Level 8 Shell" /></p>
 
 <p>To brute force the password chunk by chunk, we send two requests with the same guess to PasswordDB and look at the difference in source ports between responses to our webhook.  If the difference when guessing the first chunk is 3, then PasswordDB made 2 requests between responding to us, and thus queried the 2nd chunk server.  Likewise if the difference when guessing the 2nd chunk is 4, and guessing the 3rd chunk is 5.  I found that due to what&rsquo;s probably other users on the same challenge, I would sometimes get source port differences that were wildly off.  I solved this sub optimally: any time that I have a source port difference greater than what I expect I wait 5 seconds and try again.  If I keep getting source port differences greater than the expected 5 times in a row, I probably correctly guessed a chunk.  This is a very suboptimal way to do it, and my script took a couple of hours to finish.</p>
 
@@ -1552,7 +1552,7 @@ print &quot;Got 3/4ths of password:&quot;, guess
 
 <p>And there you have it.</p>
 
-<p><img src="http://max.computer/assets/images/stripe-ctf/the-end.png" alt="The End" /></p>
+<p><img src="http://max.computer/img/stripe-ctf/the-end.png" alt="The End" /></p>
 
 
                 <br>
