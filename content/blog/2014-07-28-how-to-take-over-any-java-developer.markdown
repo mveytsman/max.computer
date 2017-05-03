@@ -18,13 +18,13 @@ I'm happy that Sonatype made this change in their policy, and I hope they contin
 
 The other day I started hacking on a Clojure project of mine, when I saw my firewall display this:
 
-{% img /img/dilettante/firewall.png 500 %}
+![firewall](/img/dilettante/firewall.png)
 
 I'm downloading clojure.jar from [http//repo.maven.apache.org](http://repo.maven.apache.org) over port 80! This means that I'm going to be downloading JARs over unencrypted http. I thought this was an [issue](https://github.com/technomancy/leiningen/issues/1604) with [leiningen](http://leiningen.org/) at first. As it turns out it's not lein's fault at all. Clojure.jar, and a whole lot of other JARs that are important in the Java/Clojure/Scala/etc world are officially hosted on [Maven Central](http://search.maven.org/), which is a public service provided by [Sonatype](http://www.sonatype.com/). Sonatype has a policy that they only allow SSL access to people who have authentication tokens. **In order to get an authentication token and SSL access, you need to donate $10 to the Apache foundation.** If you don't believe me, the donate page is [here](http://www.sonatype.com/clm/secure-access-to-central), and the blog post announcing this policy is [here](http://www.sonatype.com/clm/secure-access-to-central). They even mention man-in-the-middle attacks on it.
 
 Because authentication tokens are issued per user/organization, tools like maven and leiningen can't bundle authentication tokens. If you're pulling down some Java project and installing its dependencies, you're not going over SSL. This policy was confirmed by a Sonatype employee when I got into a twitter tiff about this:
 
-{% img /img/dilettante/tweet.png 500 %}
+![tweet](/img/dilettante/tweet.png)
 
 
 Unless you take very careful steps that involve paying someone $10, JARs you download can be man-in-the-middled, and code you execute on your system can be replaced by malware.
@@ -37,11 +37,11 @@ To prove how easy this is to do, I wrote [dilettante](https://github.com/mveytsm
 
 Proxying HTTP traffic through dilettante will backdoor any JARs downloaded from maven central. The backdoored version will retain their functionality, but display a nice message to the user when they use the library. You can see the video below:
 
-{% video  http://blog.ontoillogical.com/assets/files/dilettante_screencast.mp4 800 %}
+<video width="100%" controls="" poster=""><source src="/files/dilettante_screencast.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
 
 Or a screenshot:
 
-{% img /img/dilettante/screen.png 800 %}
+![screen](/img/dilettante/screen.png)
 
 You can find the code [here](https://github.com/mveytsman/dilettante)
 

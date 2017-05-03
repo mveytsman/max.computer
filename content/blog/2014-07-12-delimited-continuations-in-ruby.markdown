@@ -52,7 +52,7 @@ puts "i is #{i}"
 
 We can even build a reverse GOTO (known as the COMEFROM, implementation courtesy of [Wikipedia](https://en.wikipedia.org/wiki/COMEFROM#Practical_uses)).
 
-{% codeblock ruby %}
+```ruby
 $come_from_labels = {}
  
 def label(l)
@@ -66,7 +66,7 @@ def come_from(l)
         $come_from_labels[l] = block
     end
 end
-{% endcodeblock %}
+```
 
 ## Problems Abound
 
