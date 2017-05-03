@@ -1,0 +1,26 @@
+{{ partial "header.html" . }}
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="posts">
+                <div class="page-heading">About</div>
+                <div style="display: flex; align-items: flex-start;">
+                    <div>
+                        {{ .Content }}
+                    </div>
+                    <div>
+                        <img src="{{ .Params.profile_img }} ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ partial "footer.html" . }}
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+     document.getElementById("age").innerHTML = Math.round((new Date() - new Date(1988,01,05)) / (1000*60*60*24))
+ });
+</script>
+
