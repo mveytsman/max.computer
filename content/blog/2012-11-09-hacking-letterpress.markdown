@@ -3,6 +3,8 @@ title: "Hacking Letterpress"
 date: 2012-11-09
 comments: true
 categories: security iPhone
+aliases:
+  - "blog/2012/11/09/hacking-letterpress/"
 ---
 
 **You can also find this post on my consultancy's blog [here](http://finite.state.io/blog/2012/11/09/hacking-letterpress/)**

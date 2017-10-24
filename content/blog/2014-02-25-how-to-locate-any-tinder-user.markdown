@@ -5,6 +5,8 @@ comments: true
 categories: security
 author: <a href="http://twitter.com/mveytsman">Max Veytsman</a>
 best: true
+aliases: 
+  - "blog/2014/02/25/how-to-locate-any-tinder-user/"
 ---
 
 **You can also find this post on my consultancy's blog [here](http://finite.state.io/blog/2014/02/25/how-to-locate-any-tinder-user/)**

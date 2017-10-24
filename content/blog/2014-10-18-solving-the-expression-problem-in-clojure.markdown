@@ -3,6 +3,8 @@ title: "Solving the Expression Problem in Clojure"
 date: 2014-10-18
 comments: false
 categories: 
+aliases:
+  - "blog/2014/10/18/solving-the-expression-problem-in-clojure/"
 ---
 
 Last night, I was having a drink with a friend and he asked me what I

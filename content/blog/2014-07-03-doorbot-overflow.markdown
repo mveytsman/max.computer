@@ -3,6 +3,8 @@ title: "Doorbot Overflow"
 date: 2014-07-03
 comments: true
 categories:  hacker_school security
+aliases:
+  - "blog/2014/07/03/doorbot-overflow/"
 ---
 
 Today was presentation day at Hacker School. I have a 10 minute talk about "building a better doorbot" which was secretly a talk about exploiting stack buffer overflows.  People seemed to enjoy it.

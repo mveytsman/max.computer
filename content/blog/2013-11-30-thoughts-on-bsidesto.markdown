@@ -4,6 +4,8 @@ date: 2013-11-30
 comments: true
 categories: conferences security events
 meta: true
+aliases:
+  - "blog/2013/11/30/thoughts-on-bsidesto/"
 ---
 
 Last month, I helped organize a security conference in Toronto called [BsidesTO](http://bsidesto.ca). I've attended and volunteered at my fair share of conferences, but this is the first time I've had an integral role in throwing and event of this scale. 

@@ -4,6 +4,8 @@ date: 2014-07-28
 comments: true
 categories: security hacker_school 
 best: true
+aliases:
+  - "blog/2014/07/28/how-to-take-over-any-java-developer/"
 ---
 
 **Update: 07/31/2014**

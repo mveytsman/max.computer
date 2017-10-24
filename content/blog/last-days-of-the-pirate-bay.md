@@ -3,6 +3,8 @@ title: "Last Days of The Pirate Bay"
 date: 2014-12-12
 comments: true
 categories: 
+aliases:
+  - "blog/2014/12/12/last-days-of-the-pirate-bay/"
 ---
 
 I'll be showing my BitTorrent video collage at [Long Winter](http://www.torontolongwinter.com/) tonight.

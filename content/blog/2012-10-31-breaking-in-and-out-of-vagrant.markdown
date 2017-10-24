@@ -3,6 +3,8 @@ title: "Breaking in and out of Vagrant"
 date: 2012-10-31
 comments: false
 categories: security devops
+aliases:
+  - "blog/2012/10/31/breaking-in-and-out-of-vagrant/"
 ---
 
 **You can also find this post on my consultancy's blog [here](http://finite.state.io/blog/2012/10/30/breaking-in-and-out-of-vagrant/) **

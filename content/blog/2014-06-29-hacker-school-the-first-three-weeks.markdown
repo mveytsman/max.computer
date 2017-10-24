@@ -3,6 +3,8 @@ title: "Hacker School: The First Three Weeks"
 date: 2014-06-29
 comments: true
 categories: hacker_school
+aliases:
+  - "blog/2014/06/29/hacker-school-the-first-three-weeks/"
 ---
 
 For three weeks now, I've been at

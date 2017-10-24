@@ -4,6 +4,8 @@ date: 2014-07-21
 comments: true
 categories: hacker_school
 published: true
+aliases:
+  - "blog/2014/07/21/delimited-continuations-in-ruby-part-2/"
 ---
 
 Last [time](http://blog.ontoillogical.com/blog/2014/07/12/delimited-continuations-in-ruby/), I showed some basic things you can do with delimited continuations. If you're still confused about them (as I am!) another good tutorial is [here](http://community.schemewiki.org/?composable-continuations-tutorial).

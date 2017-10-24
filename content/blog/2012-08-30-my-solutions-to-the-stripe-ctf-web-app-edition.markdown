@@ -3,6 +3,8 @@ title: "My solutions to the Stripe CTF (web app edition)"
 date: 2012-08-30
 comments: true
 categories: security CTFs
+aliases:
+  - "blog/2012/08/30/my-solutions-to-the-stripe-ctf-web-app-edition/"
 ---
 
 **You can also find this post on my consultancy's blog [here](http://finite.state.io/blog/2012/08/30/my-solutions-to-the-stripe-ctf-web-app-edition/)**
