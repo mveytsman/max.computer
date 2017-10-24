@@ -13,7 +13,7 @@
 
     <meta property="twitter:site" content="@mveytsman">
 
-<meta property="twitter:title" content="Doorbot Overflow">
+<meta property="twitter:title" content="Delimited Continuations in Ruby Part 2: Generators and Coroutines">
 
     <meta property="twitter:card" content="summary">
 
@@ -22,10 +22,10 @@
 <title>
 
 
-     Max.Computer - Doorbot Overflow 
+     Max.Computer - Delimited Continuations in Ruby Part 2: Generators and Coroutines 
 
 </title>
-<link rel="canonical" href="http://max.computer/blog/doorbot-overflow/">
+<link rel="canonical" href="http://max.computer/blog/2014/07/delimited-continuations-in-ruby-part-2-generators-and-coroutines/">
 
 
 <style media="screen">
@@ -1009,17 +1009,17 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Doorbot Overflow
+    Delimited Continuations in Ruby Part 2: Generators and Coroutines
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Thu Jul 3 2014 00:00:00 UTC">Jul 3, 2014</div>
+                    <div class="date" title="Mon Jul 21 2014 00:00:00 UTC">Jul 21, 2014</div>
                     
                         
                     
-                    <div class="reading-time"><div class="middot"></div>1 minute read</div>
+                    <div class="reading-time"><div class="middot"></div>5 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1029,9 +1029,186 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
             </div>
             <div class="markdown">
                 
-    <p>Today was presentation day at Hacker School. I have a 10 minute talk about &ldquo;building a better doorbot&rdquo; which was secretly a talk about exploiting stack buffer overflows.  People seemed to enjoy it.</p>
+    
 
-<p>The slides are available <a href="http://max.computer/files/doorbot_overflow.pdf">here</a>, and the source code is <a href="https://github.com/mveytsman/doorbot_overflow">here</a>.</p>
+<p>Last <a href="http://blog.ontoillogical.com/blog/2014/07/12/delimited-continuations-in-ruby/">time</a>, I showed some basic things you can do with delimited continuations. If you&rsquo;re still confused about them (as I am!) another good tutorial is <a href="http://community.schemewiki.org/?composable-continuations-tutorial">here</a>.</p>
+
+<p>Let&rsquo;s dive right in and build some more complicated control structures!</p>
+
+<h2 id="generators">Generators</h2>
+
+<p>Let&rsquo;s start by building what Python calls &ldquo;Generators.&rdquo; Ruby has Enumerators, which are pretty similar, but I&rsquo;ll call it a generator in order to differentiate my implementation from the Ruby core.</p>
+
+<p>Here&rsquo;s the code I want to write</p>
+
+<pre><code class="language-ruby">counter = Generator.new do |g| 
+  ctr = 0
+  while true
+    g.yield(ctr)
+    ctr += 1
+  end
+end
+</code></pre>
+
+<p>Then I use it like so</p>
+
+<pre><code class="language-ruby">counter.next
+# =&gt; 0
+counter.next
+# =&gt; 1
+counter.next
+# =&gt; 2
+# ...
+</code></pre>
+
+<p>Using delimited continuations to build a generator is pretty straight-forward. Our constructor will get a block and surround it with a <code>prompt</code> to delimit a continuation. Yielding adds the yielded value into an internal queue, and uses <code>control</code> to capture a continuation. When we call that continuation, we will execute the code around the control, which is precisely like entering at where we called yield. Getting the next value of our generator pops a result off the queue and invokes the saved continuation.</p>
+
+<p>The annotated code is below.</p>
+
+<pre><code>class Generator
+  def initialize(&amp;block)
+    # @results will be used to save values yielded by our generator
+    @results = []
+    # Calling the block is wrapped in a prompt in order to enclose it in a continuation
+    DelimR.prompt do
+      # The block is passed self, so that it can call the yield method defined below
+      block.call(self)
+    end
+  end
+  
+  def yield(result)
+    # The yield method saves the result it receives, and saves the continuation in @next
+    @results &lt;&lt; result
+    DelimR.control do |k| 
+      @next = k
+    end
+  end
+  def next
+    # @result is used as a FIFO queue of yielded values
+    r = @results.shift
+
+    # an empty @results means that no more values have been yielded
+    if r.nil?
+      raise &quot;Iterator finished&quot;
+    end
+
+    # This invokes the saved continuation, not passing it any values
+    @next.call(nil)
+
+    # return the saved @result that was shifted off the bottom of the queue
+    r
+  end
+end
+</code></pre>
+
+<h2 id="coroutines">Coroutines</h2>
+
+<p>Coroutines, also known as Fibers in ruby-land, are subroutines that can suspend their execution, to be resumed at a later point. They are very useful as a lightweight thread-like construct. They are very similar to generators, and can actually be implemented in terms of <a href="http://legacy.python.org/dev/peps/pep-0342/">them</a>. Besides being useful for asynchronous tasks, <a href="http://eli.thegreenplace.net/2009/08/29/co-routines-as-an-alternative-to-state-machines/">&ldquo;Co-routines are to state machines what recursion is to stacks&rdquo;</a>.</p>
+
+<p>We can can modify our <code>Generator</code> class to be a coroutine by renaming <code>next</code> to <code>send</code> and allowing data to be passed into it, so <code>foo = c.yield</code> will alssign whatever is sent to the coroutine to <code>foo</code> when execution resumes.</p>
+
+<pre><code class="language-ruby">class Coroutine
+  # initialize and yield are the same as for Generator
+  def send(value=nil)
+    # @result is used as a FIFO queue of yielded values
+    r = @results.shift
+
+    # an empty @results means that no more values have been yielded
+    if r.nil?
+      raise &quot;Iterator finished&quot;
+    end
+
+    # This invokes the saved continuation, not passing it any values
+    @next.call(value)
+
+    # return the saved @result that was shifted off the bottom of the queue
+    r
+  end
+end
+</code></pre>
+
+<p>Here&rsquo;s an implementation of the parsing example from Eli Bendersky&rsquo;s blog <a href="http://eli.thegreenplace.net/2009/08/29/co-routines-as-an-alternative-to-state-machines/">post</a> using the Coroutine class defined above.</p>
+
+<pre><code class="language-ruby">def hex_encode(str)
+  str.split(//).map{ |x| x.ord.to_s(16) }.join
+end
+
+frame_receiver = Coroutine.new do |c| 
+  while true
+    frame = (c.yield(true))
+    puts 'Got frame:', hex_encode(frame)
+  end
+end
+
+unwrap_protocol = Coroutine.new do |c| 
+  header = &quot;\x61&quot;
+  footer = &quot;\x62&quot;
+  dle = &quot;\xAB&quot;
+  after_dle_func = lambda { |x| x }
+  target = frame_receiver
+  # Outer loop looking for a frame header
+  #
+  while true
+    byte = (c.yield(true))
+    frame = ''
+
+    if byte == header
+      # Capture the full frame
+      #
+      while true
+       
+        byte = (c.yield(true))
+        
+        if byte == footer
+
+          target.send(frame)
+          break
+        elsif byte == dle
+          byte = (c.yield(true))
+          frame += after_dle_func.call(byte)
+        else
+          frame += byte
+        end
+      end
+    end
+  end
+end
+
+
+
+bytes = [0x70, 0x24,
+         0x61, 0x99, 0xAF, 0xD1, 0x62,
+         0x56, 0x62,
+         0x61, 0xAB, 0xAB, 0x14, 0x62,
+         0x7
+        ].map(&amp;:chr)
+
+
+bytes.each do |byte|
+  unwrap_protocol.send(byte)
+end
+
+# Got frame:
+# 99afd1
+# Got frame:
+# ab14
+</code></pre>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+
+<p>Once I had prompt/control, I found implementing generators and coroutines pretty straightforward. I think that prompt/control are easier to reason about then non-delimited continuations. One piece of evidence that I have for this is that Ruby&rsquo;s <a href="https://github.com/ruby/ruby/blob/ruby_1_8_7/lib/generator.rb">implementation</a> of generators using non-delimited continuations is harder (for me) to understand then the one above using delimited continuations.</p>
+
+<p>Either way, having an abstraction that allows you to implement new control structures is really cool and empowering. For instance, this <a href="http://www.ccs.neu.edu/racket/pubs/pldi93-sitaram.pdf">paper</a> uses delimited continuations to implement Prolog-like backtracking!</p>
+
+<p>There are still many things I don&rsquo;t understand about continuations, a partial list is below</p>
+
+<ol>
+<li>There is a difference between prompt/control and reset/shift. I don&rsquo;t know what it is.</li>
+<li>I don&rsquo;t entirely understand what <code>@@keep_delimiter_upon_effect</code> does in <a href="https://github.com/mveytsman/DelimR/blob/master/lib/delimr.rb">https://github.com/mveytsman/DelimR/blob/master/lib/delimr.rb</a></li>
+<li>In the generator example, why doesn&rsquo;t the line <code>ctr=0</code> get executed on every iteration?</li>
+<li>I actually implemented semi-coroutines. For full coroutines I need to be able to transfer exeution between them. My instricnt is that I can do this by calling resume on the target coroutine, but seeing this in the Ruby Fiber documentation makes me think there is something non-trivial I don&rsquo;t understand here:
+&gt; You cannot resume a fiber that transferred control to another one. This will cause a double resume error. You need to transfer control back to this fiber before it can yield and resume.</li>
+</ol>
 
 
                 <br>
@@ -1041,13 +1218,13 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                     
                     <div>
                         <img class="icon" src="http://max.computer/img/back.svg" alt="back" />
-                        <a href="http://max.computer/blog/hacker-school-the-first-three-weeks/">Hacker School: The First Three Weeks</a>
+                        <a href="http://max.computer/blog/2014/07/delimited-continuations-in-ruby-part-1/">Delimited Continuations in Ruby Part 1</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
                     
                     <div>
-                        <a href="http://max.computer/blog/delimited-continuations-in-ruby-part-1/">Delimited Continuations in Ruby Part 1</a>
+                        <a href="http://max.computer/blog/2014/07/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/">How to take over the computer of any Java (or Clojure or Scala) developer</a>
                         <img class="icon" src="http://max.computer/img/next.svg" alt="next" />
                     </div>
                     

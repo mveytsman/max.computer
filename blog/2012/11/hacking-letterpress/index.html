@@ -13,7 +13,7 @@
 
     <meta property="twitter:site" content="@mveytsman">
 
-<meta property="twitter:title" content="How to take over the computer of any Java (or Clojure or Scala) developer">
+<meta property="twitter:title" content="Hacking Letterpress">
 
     <meta property="twitter:card" content="summary">
 
@@ -22,10 +22,10 @@
 <title>
 
 
-     Max.Computer - How to take over the computer of any Java (or Clojure or Scala) developer 
+     Max.Computer - Hacking Letterpress 
 
 </title>
-<link rel="canonical" href="http://max.computer/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/">
+<link rel="canonical" href="http://max.computer/blog/2012/11/hacking-letterpress/">
 
 
 <style media="screen">
@@ -1009,17 +1009,17 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    How to take over the computer of any Java (or Clojure or Scala) developer
+    Hacking Letterpress
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Mon Jul 28 2014 00:00:00 UTC">Jul 28, 2014</div>
+                    <div class="date" title="Fri Nov 9 2012 00:00:00 UTC">Nov 9, 2012</div>
                     
                         
                     
-                    <div class="reading-time"><div class="middot"></div>5 minute read</div>
+                    <div class="reading-time"><div class="middot"></div>3 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1031,96 +1031,78 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 
     
 
-<p><strong>Update: 07/31/2014</strong></p>
+<p><strong>You can also find this post on my consultancy&rsquo;s blog <a href="http://finite.state.io/blog/2012/11/09/hacking-letterpress/">here</a></strong></p>
 
-<p>Sonatype has reacted to this post and will soon be turning on SSL access for all users. Their blog post announcing this is <a href="http://blog.sonatype.com/2014/07/ssl_connectivity_for_central/">here</a>. I&rsquo;m very happy that they are making this change, and the Java ecosystem is going to be more secure for it!</p>
+<p><a href="http://www.atebits.com/letterpress/">Letterpress</a> is an iOS game
+that came out a few weeks ago and immediately became popular enough to <a href="https://twitter.com/marcoarment/statuses/261337316268859392">take down Apple&rsquo;s GameCenter</a>. It&rsquo;s a cross between <a href="http://daringfireball.net/linked/2012/10/24/letterpress">Scrabble and Go</a>. The game is played on a board made out of 25 letters and players take turns building words in order to capture the letters they use.</p>
 
-<p>That being said, if you&rsquo;re reading this and are thinking of charging $10 to gauge the true demand for security features in your product, don&rsquo;t. Imagine if car companies decided to charge $10 to gauge the true demand for air bags. Luckily, we live in a world where car companies can&rsquo;t legally do that.</p>
+<p>I was hopelessly addicted to Letterpress until I figured out how to win consistently.</p>
 
-<p>I&rsquo;m happy that Sonatype made this change in their policy, and I hope they continue to <em>decrease</em> friction for security features in their products. It&rsquo;s our responsibility as developers to make the most secure product we can for our users. How much friction they are willing to endure for a security feature shouldn&rsquo;t factor into it.</p>
+<p><img src="http://max.computer/img/letterpress/winning.png" alt="winning" /></p>
 
-<hr>
+<p>As it turns out, letterpress&rsquo;s dictionary is stored on the device. By simply adding words to Letterpress&rsquo;s dictionary, you can register any
+combination of letters as a valid word.</p>
 
-<p>The other day I started hacking on a Clojure project of mine, when I saw my firewall display this:</p>
+<p>Inside your iPhone, the dictionary is spread across a
+series of text files located in <code>/&lt;Letterpress
+folder&gt;/Letterpress.app/o/[ab-zz].txt</code>. For instance, <code>ab.txt</code>
+contains all the words that begin with aa, and so on and so forth.</p>
 
-<p><img src="http://max.computer/img/dilettante/firewall.png" alt="firewall" /></p>
+<p>However, digging around a bunch of text files is no fun, and so I decided to
+write a tool to help me out.</p>
 
-<p>I&rsquo;m downloading clojure.jar from <a href="http://repo.maven.apache.org">http//repo.maven.apache.org</a> over port 80! This means that I&rsquo;m going to be downloading JARs over unencrypted http. I thought this was an <a href="https://github.com/technomancy/leiningen/issues/1604">issue</a> with <a href="http://leiningen.org/">leiningen</a> at first. As it turns out it&rsquo;s not lein&rsquo;s fault at all. Clojure.jar, and a whole lot of other JARs that are important in the Java/Clojure/Scala/etc world are officially hosted on <a href="http://search.maven.org/">Maven Central</a>, which is a public service provided by <a href="http://www.sonatype.com/">Sonatype</a>. Sonatype has a policy that they only allow SSL access to people who have authentication tokens. <strong>In order to get an authentication token and SSL access, you need to donate $10 to the Apache foundation.</strong> If you don&rsquo;t believe me, the donate page is <a href="http://www.sonatype.com/clm/secure-access-to-central">here</a>, and the blog post announcing this policy is <a href="http://www.sonatype.com/clm/secure-access-to-central">here</a>. They even mention man-in-the-middle attacks on it.</p>
+<p>By the way, the author of Letterpress does <a href="https://twitter.com/lorenb/status/261617107656138752">know</a> about people cheating this way.</p>
 
-<p>Because authentication tokens are issued per user/organization, tools like maven and leiningen can&rsquo;t bundle authentication tokens. If you&rsquo;re pulling down some Java project and installing its dependencies, you&rsquo;re not going over SSL. This policy was confirmed by a Sonatype employee when I got into a twitter tiff about this:</p>
+<h2 id="automating-letterpress-cheating">Automating Letterpress cheating</h2>
 
-<p><img src="http://max.computer/img/dilettante/tweet.png" alt="tweet" /></p>
+<p>First of all, it&rsquo;s a common misconception that you need to jailbreak a
+phone in order to access an individual app&rsquo;s files.
+Tools like
+<a href="http://www.macroplant.com/iexplorer/">iExplorer</a> allow you to, among
+other things, access an app&rsquo;s directory and modify the files there on any iPhone. (It&rsquo;s my understanding that they&rsquo;re using undocumented calls in the library iTunes uses for syncing in order to
+pull this off.)</p>
 
-<p>Unless you take very careful steps that involve paying someone $10, JARs you download can be man-in-the-middled, and code you execute on your system can be replaced by malware.</p>
+<p>Since I didn&rsquo;t want to rely on a commercial tool like iExplorer,
+I decided to use <a href="http://www.libimobiledevice.org/">libimobiledevice</a>. Libimobiledevice
+is an open-source library for talking to iDevices over USB. It&rsquo;s capable of providing
+access to the filesystem, the iPhone internals, and much more.
+Libimobiledevice supports both OS X and Linux.</p>
 
-<p>When can this happen? If you ever use a public wifi network in a coffee shop, or are on a wifi network that someone <a href="https://ettercap.github.io/ettercap/">took over</a> you can be man-in-the-middled. Your ISP can man-in-the-middle you at will, and some do so in order to serve you ads. Or, perhaps you are subject to a man-in-the-middle attack from a <a href="http://www.renesys.com/2013/11/mitm-internet-hijacking/">state actor</a>.</p>
+<p>I wrote a ruby gem that acts as an adapter for
+libimobiledevice and exposes some of the API calls in an object-oriented way. It&rsquo;s available on github as
+<a href="https://github.com/stateio/imobiledevice">imobiledevice</a>. So far, I have
+implemented only the small subset of libimobiledevice that I need,
+but I definitely welcome pull requests.</p>
 
-<h2 id="dilettante">Dilettante</h2>
+<p>Once I had a ruby wrapper for for libimobiledevice, it was simple to
+write an app that adds arbitrary words to the Letterpress dictionary.
+I call it
+<a href="https://github.com/stateio/letterpress-lexicographer">letterpress-lexicographer</a>.
+Here&rsquo;s how it works:</p>
 
-<p>To prove how easy this is to do, I wrote <a href="https://github.com/mveytsman/dilettante">dilettante</a>, a man-in-the-middle proxy that intercepts JARs from maven central and injects malicious code into them.</p>
+<h2 id="is-this-a-word">Is this a word?</h2>
 
-<p>Proxying HTTP traffic through dilettante will backdoor any JARs downloaded from maven central. The backdoored version will retain their functionality, but display a nice message to the user when they use the library. You can see the video below:</p>
+<p><img src="http://max.computer/img/letterpress/before.png" alt="Before" /></p>
 
-<video width="100%" controls="" poster=""><source src="http://max.computer/files/dilettante_screencast.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
+<h2 id="shucks">Shucks!</h2>
 
-<p>Or a screenshot:</p>
-
-<p><img src="http://max.computer/img/dilettante/screen.png" alt="screen" /></p>
-
-<p>You can find the code <a href="https://github.com/mveytsman/dilettante">here</a></p>
-
-<h2 id="the-technical-details">The Technical Details</h2>
-
-<p>When JARs are downloaded from Maven Central, they go over HTTP, so a man in the middle proxy can replace them at will. It&rsquo;s possible to sign jars, but in my experimentation with standard tools, these signatures aren&rsquo;t checked. The only other verification is a SHA1 sum, which is also sent over HTTP. When dilettante sees a JAR coming from Maven Central it replaces the original JAR with a backdoored version that runs malicious code on the victim&rsquo;s computer. Since the SHA1 hashes are sent over HTTP only, dilettante simply replaces any hashes it sees with the hash of the corresponding backdoored JAR.</p>
-
-<p>I used the excellent <a href="http://mitmproxy.org/">mitmproxy</a> library to build my tool. I started by writing an <a href="http://mitmproxy.org/doc/scripting/inlinescripts.html">inline script</a> for the proxy and then moved on to creating a standalone tool with <a href="http://mitmproxy.org/doc/scripting/libmproxy.html">libmproxy</a>.</p>
-
-<p>A JAR is just a zip file that contains Java Class files, resources and some metadata. To backdoor a JAR, I can insert my own class by adding it to the zip archive:</p>
-
-<pre><code class="language-java">package dilettante;
-
-public class Dilettante {
-    public static void() {
-        // do some evil stuff
-    }
-}
+<pre><code>./letterpress-lexicographer.rb
+ [*] Connecting to iDevice
+ [*] Connected to iDevice. UDID:REDACTED
+ [*] Accessing Letterpress app
+ [*] Accessed Letterpress app
+ [?] What word would you like to add? (/q to quit)
+  -&gt; szug
+ [+] Reading word-list /Letterpress.app/o/sz.txt
+ [+] Inserting word szug into word-list /Letterpress.app/o/sz.txt
+ [+] Successfully added word szug.  You can play it now!
 </code></pre>
 
-<p>The trick is finding a way to call my malicious class. I know that my victim will be downloading some library, and I need to run my malicious code regardless of what classes in the library they actually use. I would also like to actual functionality of the library to not be affected.</p>
+<h2 id="let-s-try-again">Let&rsquo;s try again</h2>
 
-<p>Java has the concept of static class blocks, which are class level initializers &mdash; that is, they contain code that is run once when the class (not an instance!) is loaded into memory. After I insert a malicious class file into the jar, I can call it in a static block like this:</p>
+<p><img src="http://max.computer/img/letterpress/after.png" alt="After" /></p>
 
-<pre><code class="language-java">import dilettante.*;
-static {
-    Dilettante.backdoor();
-}
-</code></pre>
-
-<p>In order to inject the above snippet, I need to inject it into Java classes directly, not source files. I use <a href="https://github.com/Storyyeller/Krakatau">Krakatau</a>, a Java disassembler/assembler library for Python. It let&rsquo;s me add the snippet in <a href="http://jasmin.sourceforge.net/">Jasmin</a> format:</p>
-
-<pre><code>.method static &lt;clinit&gt; : ()V
-  ; method code size: 4 bytes
-  .limit stack 0
-  .limit locals 0
-  invokestatic dilettante/Dilettante backdoor ()V
-  return
-.end method
-</code></pre>
-
-<h2 id="limitations">Limitations</h2>
-
-<p>This is a proof of concept!, and so it still has some limitations</p>
-
-<ol>
-<li><p>Currently it&rsquo;s not very fast. There are a couple of reasons for this</p>
-
-<ul>
-<li>I have to run a disassemble and an assemble step. It would be more efficient to directly append the assembled shim to the .class file.</li>
-<li>The way I am using Python&rsquo;s zipfile library, I&rsquo;m actually creating a second copy of every class in the zip. This is inefficient in terms of space and speed. Careful reading of the zip spec may lead to an efficient way of appending data to files inside a zip.</li>
-</ul></li>
-
-<li><p>If a user is downloading multiple JARs in one go, we will backdoor each one. The malicious payload is executed only once per JAR, but if multiple JARs are backdoored, we will execute it several times. This issue will disappear if we replace the cat picture with a high quality persistent backdoor that is smart enough to only infect a system once :).</p></li>
-</ol>
+<p>You can find the app <a href="https://github.com/stateio/letterpress-lexicographer">here</a>.  Please enjoy responsibly.</p>
 
 
                 <br>
@@ -1130,13 +1112,13 @@ static {
                     
                     <div>
                         <img class="icon" src="http://max.computer/img/back.svg" alt="back" />
-                        <a href="http://max.computer/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/">Delimited Continuations in Ruby Part 2: Generators and Coroutines</a>
+                        <a href="http://max.computer/blog/2012/10/breaking-in-and-out-of-vagrant/">Breaking in and out of Vagrant</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
                     
                     <div>
-                        <a href="http://max.computer/blog/solving-the-expression-problem-in-clojure/">Solving the Expression Problem in Clojure</a>
+                        <a href="http://max.computer/blog/2013/11/thoughts-on-bsidesto/">Thoughts on BsidesTO</a>
                         <img class="icon" src="http://max.computer/img/next.svg" alt="next" />
                     </div>
                     

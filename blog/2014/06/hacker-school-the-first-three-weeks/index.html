@@ -13,7 +13,7 @@
 
     <meta property="twitter:site" content="@mveytsman">
 
-<meta property="twitter:title" content="Solving the Expression Problem in Clojure">
+<meta property="twitter:title" content="Hacker School: The First Three Weeks">
 
     <meta property="twitter:card" content="summary">
 
@@ -22,10 +22,10 @@
 <title>
 
 
-     Max.Computer - Solving the Expression Problem in Clojure 
+     Max.Computer - Hacker School: The First Three Weeks 
 
 </title>
-<link rel="canonical" href="http://max.computer/blog/solving-the-expression-problem-in-clojure/">
+<link rel="canonical" href="http://max.computer/blog/2014/06/hacker-school-the-first-three-weeks/">
 
 
 <style media="screen">
@@ -1009,17 +1009,17 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Solving the Expression Problem in Clojure
+    Hacker School: The First Three Weeks
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Sat Oct 18 2014 00:00:00 UTC">Oct 18, 2014</div>
+                    <div class="date" title="Sun Jun 29 2014 00:00:00 UTC">Jun 29, 2014</div>
                     
                         
                     
-                    <div class="reading-time"><div class="middot"></div>6 minute read</div>
+                    <div class="reading-time"><div class="middot"></div>4 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1031,279 +1031,61 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 
     
 
-<p>Last night, I was having a drink with a friend and he asked me what I
-liked about Clojure. Immutable data structures are coming in vogue
-<a href="https://github.com/facebook/immutable-js">outside</a> Clojure, and they
-don&rsquo;t need to be sold very hard. I don&rsquo;t know a lot about virtual
-machine optimization, but I&rsquo;ve always been swayed by the argument that
-with the amount of dollars and intellectual effort spent on JVM
-optimization in the past decades, it&rsquo;s pretty fast. Honestly, I just
-find <a href="http://xkcd.com/297/">parentheses</a> alluring.</p>
+<p>For three weeks now, I&rsquo;ve been at
+<a href="http://hackerschool.com">Hacker School</a>. Hacker School is hard to
+describe, they call themselves a &ldquo;writer&rsquo;s retreat for programmers.&rdquo;
+Personally I prefer &ldquo;programmer summer camp,&rdquo; mostly because I have no
+idea what writer&rsquo;s retreats are like. Basically it&rsquo;s a collection of
+people working in a self-directed way to improve their skills as
+programmers. They accept people of all skill levels, as long as you
+have programmed before.  I&rsquo;ve heard &ldquo;but Max, you already know Ruby on
+Rails&rdquo; from more then one person when telling them I&rsquo;m going to Hacker
+School, so I think I should let you know that Hacker School doesn&rsquo;t
+have a curriculum, isn&rsquo;t a bootcamp, and I&rsquo;m trying to write as little
+Ruby as I can get away while here.</p>
 
-<p>Then I tried to say something about how protocols elegantly solve the
-expression problem, my friend had no idea what I was talking about.</p>
+<p>I have a lot to say about what it feels like to go to a Montessori
+school for adults, but I&rsquo;ll save that for another blog post. This is
+going to be a inventory of what I&rsquo;ve been working and thinking about
+while here, and some of my goals. One of my goals coming in was to
+blog a lot. I haven&rsquo;t done it, but I hope this will the first of n
+Hacker School blog posts (for sufficiently large n).</p>
 
-<p>I started writing an email about what I meant, and it morphed into this post.</p>
+<h2 id="what-i-m-doing">What I&rsquo;m Doing</h2>
 
-<h2 id="the-expression-problem">The expression problem</h2>
+<p>I&rsquo;ve started a lot of projects while here, but they fall into two main categories. Courses and Projects.</p>
 
-<p>To be honest, &ldquo;a drink&rdquo; is somewhat of an understatement, and I did a
-poor job of explaining what the expression problem actually is.</p>
-
-<p>The best explanation of the expression problem comes from
-<a href="http://c2.com/cgi/wiki?ExpressionProblem">c2.com</a>, and I include it
-almost in its entirety:</p>
-
-<blockquote>
-<p>The &ldquo;expression problem&rdquo; is a phrase used to describe a dual problem that neither ObjectOrientedProgramming nor FunctionalProgramming fully addresses.</p>
-
-<p>The basic problem can be expressed in terms of a simple example: Suppose you wish to describe shapes, including rectangles and circles, and you wish to compute the areas.</p>
-
-<p>In FunctionalProgramming, you would describe a data type such as:</p>
-
-<pre><code>type Shape = Square of side
-             | Circle of radius 
-</code></pre>
-
-<p>Then you would define a single area function:</p>
-
-<pre><code>define area = fun x -&gt; case x of
-    Square of side =&gt; (side * side)
-    | Circle of radius =&gt; (3.14 *  radius * radius)
-</code></pre>
-
-<p>In ObjectOrientedProgramming, you would describe the data type such as:</p>
-
-<pre><code>class Shape &lt;: Object
-  virtual fun area : () -&gt; double
-
-class Square &lt;: Shape
-  side : double
-  area() =  side * side
-
-class Circle &lt;: Shape
-  radius : double
-  area() = 3.14 * radius * radius
-</code></pre>
-
-<p>The &lsquo;ExpressionProblem&rsquo; manifests when you wish to &lsquo;extend&rsquo; the set of objects or functions.</p>
+<h3 id="courses">Courses</h3>
 
 <ul>
-<li>If you want to add a &lsquo;triangle&rsquo; shape:
-
-<ul>
-<li>the ObjectOrientedProgramming approach makes it easy (because you can simply create a new class)</li>
-<li>but FunctionalProgramming makes it difficult (because you&rsquo;ll need to edit every function that accepts a &lsquo;Shape&rsquo; parameter, including &lsquo;area&rsquo;)</li>
-</ul></li>
-<li>OTOH, if you want add a &lsquo;perimeter&rsquo; function:
-
-<ul>
-<li>FunctionalProgramming makes it easy (simply add a new function &lsquo;perimeter&rsquo;)</li>
-<li>while ObjectOrientedProgramming makes it difficult (because you&rsquo;ll need to edit every class to add &lsquo;perimeter()&rsquo; to the interface).</li>
-</ul></li>
+<li>I started <a href="https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours">Write Yourself a Scheme in 48 Hours</a> with another Hacker Schooler <a href="https://github.com/mveytsman/scheme48">here</a>. I&rsquo;m finding that I&rsquo;m not getting a lot of out of it &mdash; I&rsquo;m running into a lot of issues that would be solved with a more traditional Haskell resource, so to that end,</li>
+<li>I started Yorgey&rsquo;s Haskell <a href="http://www.cis.upenn.edu/~cis194/">course</a> <a href="https://github.com/mveytsman/scheme48">here</a></li>
+<li>I started working through this <a href="http://www.trailofbits.com/training/assured_exploitation/">exploitation</a> course.</li>
+<li>I signed up for Dan Boneh&rsquo;s <a href="https://www.coursera.org/course/crypto">crypto</a> course which starts tomorrow.</li>
 </ul>
-</blockquote>
 
-<h2 id="defining-some-shapes">Defining some shapes</h2>
+<p>This above is very ambitious, and I fully expect to not finish most of these. I&rsquo;m pretty sure I&rsquo;m not going to come back to the Haskell Scheme interpreter course. I would like to finish the Haskell and exploitation class. I&rsquo;ve started the crypto class many times before already, so there&rsquo;s that.</p>
 
-<p>Clojure&rsquo;s <a href="http://clojure.org/datatypes">records</a> serve the purpose of types and classes in the examples above.</p>
+<h3 id="projects">Projects</h3>
 
-<pre><code class="language-clojure">;; We have circles with radii
-(defrecord Circle [radius])
+<ul>
+<li>To prove to myself just how much better I understand Ruby then Haskell, I wrote a very simple <a href="https://github.com/mveytsman/rubbyskeme">Scheme interpreter</a> based on Norvig&rsquo;s <a href="http://norvig.com/lispy.html">lispy</a></li>
+<li>My main project so far is implementing an <a href="https://github.com/mveytsman/emm-ess-pee">emulator</a> for the <a href="https://en.wikipedia.org/wiki/TI_MSP430">MSP430</a> in clojure.</li>
+</ul>
 
-;; and squares with sides, oh my!
-(defrecord Square [side])
+<h3 id="emulator">Emulator</h3>
 
-;; Here's a circle
-(def my-circle (Circle. 5))
+<p>The emulator project has been taking up most of my time here, and it&rsquo;s worth talking about it more. The MSP430 is the chipset
+used in the <a href="https://microcorruption.com/">MicroCorruption</a> hacking
+game. Working on the emulator has helped me get better at reversing the MIPS assembly used by the processor, and I finally got to the last <a href="https://microcorruption.com/profile/96">level</a> after a 5 month hiatus.</p>
 
-;; And a square!
-(def my-square (Square. 4))
-</code></pre>
+<p>I have two directions I want to take this emulator in. First of all, I have started reading <a href="https://www.usenix.org/system/files/conference/woot12/woot12-final26.pdf">papers</a> about using <a href="https://en.wikipedia.org/wiki/Satisfiability_Modulo_Theories">SMT solvers</a> in binary reverse engineering and exploitation. I would like to develop some heuristics for solving the microcorruption challenges automatically. Since I already have an emulator, the next step would be to emit SMT formulas based on execution traces. I don&rsquo;t actually understand how to solve the problem deeper then the above sentence, so the real next step is to read more papers.</p>
 
-<h2 id="adding-a-new-shape">Adding a new Shape</h2>
+<p>The other direction I have been thinking about is to port my emulator from Clojure into Clojurescript and build a web-based UI around it. The microcorruption game has a web based emulator, but the emulation actually happens on a sever and the browser provides only the UI. I have this vague idea of using colors to map display bytes in memory and show a buffer overflow as mixing colors. That&rsquo;s about all I got though, but it&rsquo;s a good excuse to learn <a href="https://github.com/swannodette/om">Om</a>.</p>
 
-<p>As the quote above says, in functional programming languages, defining a perimeter function is easy, but adding a new shape is hard. If our area function looks like this:</p>
+<h2 id="future-posts">Future posts</h2>
 
-<pre><code class="language-clojure">(defn area [shape]
-  (cond 
-   (instance? Circle shape) (* Math/PI (:radius shape) (:radius shape))
-   (instance? Square shape) (* (:side shape) (:side shape))))
-</code></pre>
-
-<p>we can easily add a perimeter function in the same vein, but adding a
-new shape is harder.</p>
-
-<p>We can define a new record:</p>
-
-<pre><code class="language-clojure">(defrecord Triangle [a b c])
-</code></pre>
-
-<p>But now we&rsquo;re stuck rewriting the <code>area</code> function to include <code>Triangle</code> in the switch statement. If we were using a shape library that didn&rsquo;t have triangles, we would have a hard
-time extending it without forking their code.</p>
-
-<p>We need a better way to do polymorphism then a switch statement!</p>
-
-<p>One choice is <a href="http://clojure.org/multimethods">multi-methods</a>, but I&rsquo;m going to focus on Protocols.</p>
-
-<h2 id="protocols">Protocols</h2>
-
-<p><a href="http://clojure.org/protocols">Protocols</a> are an abstract notion of
-interfaces from OO land. A protocol is simply a set of methods and
-their signatures. If a type participates in a protocol, there exists
-an implementation for that method for that type.</p>
-
-<pre><code class="language-clojure">;; Things that are Areable have an area method
-(defprotocol Areable
-  (area [this]))
-</code></pre>
-
-<p>We use <code>extend-protocol</code> to define how <code>Square</code> and <code>Circle</code> implement the <code>Areable</code> protocol<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
-
-<pre><code class="language-clojure">;; Circles and Squares are Areable
-(extend-protocol Areable
-  Circle
-  (area [{radius :radius}] (* Math/PI radius radius))
-  Square
-  (area [{side :side}] (* side side)))
-</code></pre>
-
-<p>Protocol methods behave just like functions, with dispatch determined by the type of the argument:</p>
-
-<pre><code class="language-clojure">;; A circle with the radius 5
-(def my-circle (Circle. 5))
-
-(area my-circle)
-; =&gt; 78.53981633974483
-
-;; A square with the side 5
-(def my-square (Square. 5))
-
-(area my-square)
-; =&gt; 25
-</code></pre>
-
-<p>With protocols we simple extend the Triangle type to support the Areable protocol:</p>
-
-<pre><code class="language-clojure">(extend-type Triangle
-  Areable
-  (area [this] ...))
-</code></pre>
-
-<h2 id="adding-a-new-function">Adding a new function</h2>
-
-<p>The other part of the expression problem is defining a &ldquo;perimeter&rdquo;
-method. Types can implement multiple protocols, and this implementation can be
-written anywhere. You can define a new protocol, and then extend core
-Java classes to participate in it. If you come from the Ruby world,
-you might think that this is similar to monkey-patching, and it is.</p>
-
-<p>Because we can extend the <code>Circle</code> and <code>Square</code> types to participate
-in a new protocol, adding a perimeter is also straightforward:</p>
-
-<p>We define a new protocol</p>
-
-<pre><code class="language-clojure">(defprotocol Perimeterable
-  (perimeter [this]))
-</code></pre>
-
-<p>and extend it to support <code>Circle</code> and <code>Square</code></p>
-
-<pre><code>(extend-protocol Perimeterable
-  Circle
-  (perimeter [{radius :radius}] (* 2 Math/PI radius))
-  Square
-  (perimeter [{side :side}] (* 4 side)))
-</code></pre>
-
-<h2 id="on-monkey-patching">On &ldquo;monkey-patching&rdquo;</h2>
-
-<p>If you come from the Ruby world, the above code might remind you of
-monkey-patching. Monkey-patching certainly deserves its infamy, but
-it&rsquo;s problems are misunderstood. Being able to add functionality to
-core types is not a bad thing! The issue is namespacing.</p>
-
-<p>What bothers many people about monkey-patching in Ruby is that you can load
-a library, and suddenly it injects all kinds of new methods into core
-classes you didn&rsquo;t expect:</p>
-
-<pre><code class="language-ruby">&quot;string&quot;.methods.count
-# =&gt; 170
-require 'rails'
-&quot;string&quot;.methods.count
-# =&gt; 225
-</code></pre>
-
-<p>Now your code has 55 new methods in the String class, and who knows
-how many of the existing String methods you know and love have been
-redefined!</p>
-
-<p>In Clojure, you can extend core types to support whatever protocol you
-want, but participating in a protocol is just like defining some functions,
-and those functions are scoped to a namespace:</p>
-
-<pre><code class="language-clojure">(def foo bar)
-(in-ns 'monkeypatching)
-;; We're now in the monkeypatching namespace
-
-(defprotocol Monkey
-  (patch [this]))
-            
-;; Let's let nil and String participate in this protocol
-(extend-protocol Monkey
-  nil
-  (patch [this] &quot;Check out this cool nil!&quot;)
-  String
-  (patch [this] &quot;I'm an awesome string!&quot;))
-
-(patch nil)
-; =&gt; &quot;Check out this cool nil!&quot;
-(patch &quot;this is some string&quot;)
-; =&gt; &quot;I'm an awesome string!&quot;
-
-;; Now we switch back to another namespace to do some hard work
-(in-ns 'workin-hard)
-
-(patch nil)
-; =&gt; CompilerException java.lang.RuntimeException: Unable to resolve symbol: patch in this context, compiling:(NO_SOURCE_PATH:1:1)
-
-;; We can access the &quot;monkeypatched&quot; methods by using their namespace
-(monkeypatching/patch &quot;a string&quot;)
-; =&gt; &quot;I'm an awesome string!&quot;
-</code></pre>
-
-<h2 id="brining-it-together">Brining it together</h2>
-
-<p>Let&rsquo;s add a <code>Triangle</code> type that support both <code>area</code> and <code>perimeter</code>.  We can even provide implementations for the protocols it
-participates in directly inside of <code>defrecord</code>:</p>
-
-<pre><code class="language-clojure">(defrecord Triangle [a b c]
-  Areable
-  ;; The hardest part of solving the expression problem in Clojure is looking up highschool geometry
-  ;; Heron's formula
-  (area [{:keys [a b c]}] 
-    (let [s (/ (+ a b c) 2)]
-       (Math/sqrt (* s (- s a) (- s b) (- s c)))))
-  Perimeterable
-  (perimeter [{:keys [a b c]}] (+ a b c)))
-</code></pre>
-
-<h2 id="footnotes">Footnotes</h2>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1"><p>The <code>[{radius :radius}]</code> bit may be confusing. It&rsquo;s using <a href="http://clojure.org/special_forms#Special%20Forms--Binding%20Forms%20%28Destructuring%29-Map%20binding%20destructuring">map destructuring</a> to bind the <code>:radius</code> field of the Circle record to the symbol <code>radius</code>.
-Without it, the function would look like this:</p>
-
-<pre><code>(area [this]
-  (let [radius (:radius this)]
-    (* Math/PI radius radius)))
-</code></pre>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-</ol>
-</div>
+<p>Next time I&rsquo;ll explain how the biggest lesson I learned from writing a emulator in a functional programming style was about testing and talk about writing my first (!) clojure macros.</p>
 
 
                 <br>
@@ -1313,13 +1095,13 @@ Without it, the function would look like this:</p>
                     
                     <div>
                         <img class="icon" src="http://max.computer/img/back.svg" alt="back" />
-                        <a href="http://max.computer/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/">How to take over the computer of any Java (or Clojure or Scala) developer</a>
+                        <a href="http://max.computer/blog/2014/02/how-to-locate-any-tinder-user/">How to locate any Tinder user</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
                     
                     <div>
-                        <a href="http://max.computer/blog/last-days-of-the-pirate-bay/">Last Days of The Pirate Bay</a>
+                        <a href="http://max.computer/blog/2014/07/doorbot-overflow/">Doorbot Overflow</a>
                         <img class="icon" src="http://max.computer/img/next.svg" alt="next" />
                     </div>
                     

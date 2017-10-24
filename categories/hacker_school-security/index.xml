@@ -14,10 +14,10 @@
     
     <item>
       <title>Doorbot Overflow</title>
-      <link>http://max.computer/blog/doorbot-overflow/</link>
+      <link>http://max.computer/blog/2014/07/doorbot-overflow/</link>
       <pubDate>Thu, 03 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://max.computer/blog/doorbot-overflow/</guid>
+      <guid>http://max.computer/blog/2014/07/doorbot-overflow/</guid>
       <description>Today was presentation day at Hacker School. I have a 10 minute talk about &amp;ldquo;building a better doorbot&amp;rdquo; which was secretly a talk about exploiting stack buffer overflows. People seemed to enjoy it.
 The slides are available here, and the source code is here.</description>
     </item>

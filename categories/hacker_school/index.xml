@@ -14,10 +14,10 @@
     
     <item>
       <title>Delimited Continuations in Ruby Part 2: Generators and Coroutines</title>
-      <link>http://max.computer/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</link>
+      <link>http://max.computer/blog/2014/07/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</link>
       <pubDate>Mon, 21 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://max.computer/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</guid>
+      <guid>http://max.computer/blog/2014/07/delimited-continuations-in-ruby-part-2-generators-and-coroutines/</guid>
       <description>Last time, I showed some basic things you can do with delimited continuations. If you&amp;rsquo;re still confused about them (as I am!) another good tutorial is here.
 Let&amp;rsquo;s dive right in and build some more complicated control structures!
 Generators Let&amp;rsquo;s start by building what Python calls &amp;ldquo;Generators.&amp;rdquo; Ruby has Enumerators, which are pretty similar, but I&amp;rsquo;ll call it a generator in order to differentiate my implementation from the Ruby core.</description>
@@ -25,20 +25,20 @@ Generators Let&amp;rsquo;s start by building what Python calls &amp;ldquo;Genera
     
     <item>
       <title>Delimited Continuations in Ruby Part 1</title>
-      <link>http://max.computer/blog/delimited-continuations-in-ruby-part-1/</link>
+      <link>http://max.computer/blog/2014/07/delimited-continuations-in-ruby-part-1/</link>
       <pubDate>Sat, 12 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://max.computer/blog/delimited-continuations-in-ruby-part-1/</guid>
+      <guid>http://max.computer/blog/2014/07/delimited-continuations-in-ruby-part-1/</guid>
       <description>For the past few days at Hacker School, I&amp;rsquo;ve been exploring continuations. Continuations are hard to describe. Basically, a continuation represents the execution state of a program at a point. Capturing the continuation and invoking it later allows you to come back to that point in the programs execution. Continuations can be used to implement complicated control flow constructs.
 If that was complicated, here&amp;rsquo;s a sandwich metaphor from Luke Palmer:</description>
     </item>
     
     <item>
       <title>Hacker School: The First Three Weeks</title>
-      <link>http://max.computer/blog/hacker-school-the-first-three-weeks/</link>
+      <link>http://max.computer/blog/2014/06/hacker-school-the-first-three-weeks/</link>
       <pubDate>Sun, 29 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://max.computer/blog/hacker-school-the-first-three-weeks/</guid>
+      <guid>http://max.computer/blog/2014/06/hacker-school-the-first-three-weeks/</guid>
       <description>For three weeks now, I&amp;rsquo;ve been at Hacker School. Hacker School is hard to describe, they call themselves a &amp;ldquo;writer&amp;rsquo;s retreat for programmers.&amp;rdquo; Personally I prefer &amp;ldquo;programmer summer camp,&amp;rdquo; mostly because I have no idea what writer&amp;rsquo;s retreats are like. Basically it&amp;rsquo;s a collection of people working in a self-directed way to improve their skills as programmers. They accept people of all skill levels, as long as you have programmed before.</description>
     </item>
     

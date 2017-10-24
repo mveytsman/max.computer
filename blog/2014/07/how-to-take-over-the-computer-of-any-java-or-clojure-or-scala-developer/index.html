@@ -13,7 +13,7 @@
 
     <meta property="twitter:site" content="@mveytsman">
 
-<meta property="twitter:title" content="Breaking in and out of Vagrant">
+<meta property="twitter:title" content="How to take over the computer of any Java (or Clojure or Scala) developer">
 
     <meta property="twitter:card" content="summary">
 
@@ -22,10 +22,10 @@
 <title>
 
 
-     Max.Computer - Breaking in and out of Vagrant 
+     Max.Computer - How to take over the computer of any Java (or Clojure or Scala) developer 
 
 </title>
-<link rel="canonical" href="http://max.computer/blog/breaking-in-and-out-of-vagrant/">
+<link rel="canonical" href="http://max.computer/blog/2014/07/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/">
 
 
 <style media="screen">
@@ -1009,13 +1009,13 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Breaking in and out of Vagrant
+    How to take over the computer of any Java (or Clojure or Scala) developer
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Wed Oct 31 2012 00:00:00 UTC">Oct 31, 2012</div>
+                    <div class="date" title="Mon Jul 28 2014 00:00:00 UTC">Jul 28, 2014</div>
                     
                         
                     
@@ -1031,135 +1031,96 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 
     
 
-<p>**You can also find this post on my consultancy&rsquo;s blog <a href="http://finite.state.io/blog/2012/10/30/breaking-in-and-out-of-vagrant/">here</a> **</p>
+<p><strong>Update: 07/31/2014</strong></p>
 
-<p><a href="http://vagrantup.com/">Vagrant</a> is a great tool that allows you to
-easily spawn and configure lightweight VMs to use as development
-environments. Vagrant provides base installs of several flavours of
-Linux, and takes care of setting up networking and shared folders for
-you.</p>
+<p>Sonatype has reacted to this post and will soon be turning on SSL access for all users. Their blog post announcing this is <a href="http://blog.sonatype.com/2014/07/ssl_connectivity_for_central/">here</a>. I&rsquo;m very happy that they are making this change, and the Java ecosystem is going to be more secure for it!</p>
 
-<p>Vagrant is really useful for managing your development environment,
-and I highly recommend it. If you&rsquo;re doing a lot of development,
-you might need to be running all kinds of application and database
-servers on your machine, and it&rsquo;s probably a much better idea to run
-them in a VM rather than on your host machine.</p>
+<p>That being said, if you&rsquo;re reading this and are thinking of charging $10 to gauge the true demand for security features in your product, don&rsquo;t. Imagine if car companies decided to charge $10 to gauge the true demand for air bags. Luckily, we live in a world where car companies can&rsquo;t legally do that.</p>
 
-<p>Unfortunately, if you expose your Vagrant VMs (or any development VMs
-really) to the outside world, what seemed like a secure best practice
-can end up being very insecure. This isn&rsquo;t a novel concept, but the
-disposable nature of virtual machines makes it easy to forget to think
-about their security. A common attitude is &ldquo;What&rsquo;s the worst that can
-happen if someone gets on my development VM? I blow away and
-re-generate this VM every half hour anyway, and aren&rsquo;t VM escape bugs
-rare and esoteric anyway?&rdquo;</p>
+<p>I&rsquo;m happy that Sonatype made this change in their policy, and I hope they continue to <em>decrease</em> friction for security features in their products. It&rsquo;s our responsibility as developers to make the most secure product we can for our users. How much friction they are willing to endure for a security feature shouldn&rsquo;t factor into it.</p>
 
-<p>I&rsquo;m going to show a really simple way to break out of Vagrant VMs, but first,</p>
+<hr>
 
-<h2 id="how-vagrant-is-used">How Vagrant is Used</h2>
+<p>The other day I started hacking on a Clojure project of mine, when I saw my firewall display this:</p>
 
-<p>Vagrant VMs are designed to be lightweight and built per-project. The
-VMs around a concept of &ldquo;base boxes,&rdquo; which are base installs of
-various flavours of linux. You initialize a Vagrant VM from a base
-box, and then can install your desired environment.</p>
+<p><img src="http://max.computer/img/dilettante/firewall.png" alt="firewall" /></p>
 
-<p>By default, Vagrant shares your project folder
-with the VM at <code>/vagrant/</code>. So, a usual workflow would be:</p>
+<p>I&rsquo;m downloading clojure.jar from <a href="http://repo.maven.apache.org">http//repo.maven.apache.org</a> over port 80! This means that I&rsquo;m going to be downloading JARs over unencrypted http. I thought this was an <a href="https://github.com/technomancy/leiningen/issues/1604">issue</a> with <a href="http://leiningen.org/">leiningen</a> at first. As it turns out it&rsquo;s not lein&rsquo;s fault at all. Clojure.jar, and a whole lot of other JARs that are important in the Java/Clojure/Scala/etc world are officially hosted on <a href="http://search.maven.org/">Maven Central</a>, which is a public service provided by <a href="http://www.sonatype.com/">Sonatype</a>. Sonatype has a policy that they only allow SSL access to people who have authentication tokens. <strong>In order to get an authentication token and SSL access, you need to donate $10 to the Apache foundation.</strong> If you don&rsquo;t believe me, the donate page is <a href="http://www.sonatype.com/clm/secure-access-to-central">here</a>, and the blog post announcing this policy is <a href="http://www.sonatype.com/clm/secure-access-to-central">here</a>. They even mention man-in-the-middle attacks on it.</p>
 
-<pre><code class="language-bash">host: $ cd /my/project/here/
-host: $ #we're going to base our VM on an Ubuntu Lucid 32bit base box 
-host: $ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
-host: $ vagrant init lucid32 
-host: $ vagrant up
-host: $ vagrant ssh
-  vm: $ #now we are on the VM
-  vm: $ cd /vagrant/
-  vm: $ run_my_server
+<p>Because authentication tokens are issued per user/organization, tools like maven and leiningen can&rsquo;t bundle authentication tokens. If you&rsquo;re pulling down some Java project and installing its dependencies, you&rsquo;re not going over SSL. This policy was confirmed by a Sonatype employee when I got into a twitter tiff about this:</p>
+
+<p><img src="http://max.computer/img/dilettante/tweet.png" alt="tweet" /></p>
+
+<p>Unless you take very careful steps that involve paying someone $10, JARs you download can be man-in-the-middled, and code you execute on your system can be replaced by malware.</p>
+
+<p>When can this happen? If you ever use a public wifi network in a coffee shop, or are on a wifi network that someone <a href="https://ettercap.github.io/ettercap/">took over</a> you can be man-in-the-middled. Your ISP can man-in-the-middle you at will, and some do so in order to serve you ads. Or, perhaps you are subject to a man-in-the-middle attack from a <a href="http://www.renesys.com/2013/11/mitm-internet-hijacking/">state actor</a>.</p>
+
+<h2 id="dilettante">Dilettante</h2>
+
+<p>To prove how easy this is to do, I wrote <a href="https://github.com/mveytsman/dilettante">dilettante</a>, a man-in-the-middle proxy that intercepts JARs from maven central and injects malicious code into them.</p>
+
+<p>Proxying HTTP traffic through dilettante will backdoor any JARs downloaded from maven central. The backdoored version will retain their functionality, but display a nice message to the user when they use the library. You can see the video below:</p>
+
+<video width="100%" controls="" poster=""><source src="http://max.computer/files/dilettante_screencast.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" /></video>
+
+<p>Or a screenshot:</p>
+
+<p><img src="http://max.computer/img/dilettante/screen.png" alt="screen" /></p>
+
+<p>You can find the code <a href="https://github.com/mveytsman/dilettante">here</a></p>
+
+<h2 id="the-technical-details">The Technical Details</h2>
+
+<p>When JARs are downloaded from Maven Central, they go over HTTP, so a man in the middle proxy can replace them at will. It&rsquo;s possible to sign jars, but in my experimentation with standard tools, these signatures aren&rsquo;t checked. The only other verification is a SHA1 sum, which is also sent over HTTP. When dilettante sees a JAR coming from Maven Central it replaces the original JAR with a backdoored version that runs malicious code on the victim&rsquo;s computer. Since the SHA1 hashes are sent over HTTP only, dilettante simply replaces any hashes it sees with the hash of the corresponding backdoored JAR.</p>
+
+<p>I used the excellent <a href="http://mitmproxy.org/">mitmproxy</a> library to build my tool. I started by writing an <a href="http://mitmproxy.org/doc/scripting/inlinescripts.html">inline script</a> for the proxy and then moved on to creating a standalone tool with <a href="http://mitmproxy.org/doc/scripting/libmproxy.html">libmproxy</a>.</p>
+
+<p>A JAR is just a zip file that contains Java Class files, resources and some metadata. To backdoor a JAR, I can insert my own class by adding it to the zip archive:</p>
+
+<pre><code class="language-java">package dilettante;
+
+public class Dilettante {
+    public static void() {
+        // do some evil stuff
+    }
+}
 </code></pre>
 
-<p>You can then edit the code on your host machine, and use the VM to run an applciation and database server.</p>
+<p>The trick is finding a way to call my malicious class. I know that my victim will be downloading some library, and I need to run my malicious code regardless of what classes in the library they actually use. I would also like to actual functionality of the library to not be affected.</p>
 
-<h2 id="bridging-the-network">Bridging the Network</h2>
+<p>Java has the concept of static class blocks, which are class level initializers &mdash; that is, they contain code that is run once when the class (not an instance!) is loaded into memory. After I insert a malicious class file into the jar, I can call it in a static block like this:</p>
 
-<p>Just like in any virtual machine, you can configure your Vagrant VMs&rsquo;
-networking to run in host-only mode or in bridged mode. In host-only
-mode, a VM uses a virtual network adapter and is basically only
-accessible from the host. In bridged mode, the VM bridges through the
-network adapter of the host machine, and actually connects to the same
-network as the host. So, for example, if you bridge a VM to a wifi
-device, the VM will have a different IP address on the same wifi
-network as the host. And of course, you&rsquo;ll be able to access the VM
-from other machines on the wifi network. In host-only mode, the VM is
-not accessible from outside the host. As they say, NAT is the poor
-man&rsquo;s firewall.</p>
+<pre><code class="language-java">import dilettante.*;
+static {
+    Dilettante.backdoor();
+}
+</code></pre>
 
-<p>The Vagrant
-<a href="http://vagrantup.com/v1/docs/bridged_networking.html">documentation</a>
-doesn&rsquo;t mention any security risks of running development VMs in
-bridged mode. There&rsquo;s a promising alert box, but the contents are:</p>
+<p>In order to inject the above snippet, I need to inject it into Java classes directly, not source files. I use <a href="https://github.com/Storyyeller/Krakatau">Krakatau</a>, a Java disassembler/assembler library for Python. It let&rsquo;s me add the snippet in <a href="http://jasmin.sourceforge.net/">Jasmin</a> format:</p>
 
-<blockquote>
-<h4 id="not-all-networks-work">Not All Networks Work!</h4>
+<pre><code>.method static &lt;clinit&gt; : ()V
+  ; method code size: 4 bytes
+  .limit stack 0
+  .limit locals 0
+  invokestatic dilettante/Dilettante backdoor ()V
+  return
+.end method
+</code></pre>
 
-<p>Some networks will not work properly with bridged networking. Specifically, I&rsquo;ve found that hotel networks, airport networks, and generally public-shared networks have configurations in place such that bridging does not work.
-You can tell if the bridged networking worked successfully by seeing if the virtual machine was able to get an IP address on the bridged adapter.</p>
-</blockquote>
+<h2 id="limitations">Limitations</h2>
 
-<p>The author doesn&rsquo;t seem to see any intrinsic problem with running Vagrant VMs in hotels, airports, and coffee-shops outside of it sometimes not working.</p>
+<p>This is a proof of concept!, and so it still has some limitations</p>
 
-<h2 id="breaking-in">Breaking In</h2>
+<ol>
+<li><p>Currently it&rsquo;s not very fast. There are a couple of reasons for this</p>
 
-<p>So after scanning the airport wifi, you found someone running a
-Vagrant VM in bridged mode. How do you get in? First of all, they are
-most like likely doing some kind of development on it, so the VM is
-probably running an app that&rsquo;s not very secured. There&rsquo;s also a good
-chance that this VM is running a database and maybe CouchDB or Redis.
-One of these is probably using guessable credentials (this is the
-development environment after all), or the app itself might have an
-exploitable bug.</p>
+<ul>
+<li>I have to run a disassemble and an assemble step. It would be more efficient to directly append the assembled shim to the .class file.</li>
+<li>The way I am using Python&rsquo;s zipfile library, I&rsquo;m actually creating a second copy of every class in the zip. This is inefficient in terms of space and speed. Careful reading of the zip spec may lead to an efficient way of appending data to files inside a zip.</li>
+</ul></li>
 
-<p>All of the above sounds too hard. Remember the <code>vagrant ssh</code> command
-above? Well, it has to get in somehow.</p>
-
-<p>On all of the VMs built from official base boxes, like <code>lucid32</code> the
-credentials are <code>vagrant : vagrant</code>. The instructions for developers
-building new base boxes actually say not to use password-based SSH
-logins. Instead, anyone building a base box for public consumption is
-using these <a href="https://github.com/mitchellh/vagrant/tree/master/keys/">SSH keys</a> for the
-<code>vagrant</code> user.</p>
-
-<p>Either way, any Vagrant VM built from a public base box (read: almost
-all of them) is going to be accessible with either <code>vagrant : vagrant</code>
-or the SSH keys above.</p>
-
-<h2 id="breaking-out">Breaking Out</h2>
-
-<p>Breaking into a development VM isn&rsquo;t a big deal on it&rsquo;s own,
-especially since the vagrant workflow encourages blowing-away and
-rebuilding the VM often. What you really want is code execution on the
-host, and it&rsquo;s going to be surprisingly easy to do that.</p>
-
-<p>The Vagrant workflow encourages you to edit your code outside the VM.
-That&rsquo;s why Vagrant helpfully shares the project directory as
-<code>/vagrant/</code> in the VM. It&rsquo;s a safe assumption that anyone using
-Vagrant for development is using some kind of version control, and if
-that&rsquo;s the case, they are probably going to be interacting with it on
-the host machine (where they edit the code). This is how we&rsquo;ll get
-execution on the host.</p>
-
-<p>For simplicity, I&rsquo;m going to focus on Git, but this trick should work
-for any other commonly used VCS. Hooks are little shell scripts that
-run after you commit a certain action. For instance, a <code>post-commit</code>
-hook is a shell script that git will execute every time a commit is
-completed. Hooks are placed in <code>.git/hooks/HOOK-NAME</code>.</p>
-
-<p>So if I get on a Vagrant VM and want to escape into the host, all I
-have to do is create a post-commit hook. I simply put evil things in
-<code>/vagrant/.git/hooks/post-commit</code> and wait for the user to commit some
-code. Since the <code>/vagrant/</code> directory is mounted from the host, my
-hook will persist even if the user destroys the VM.</p>
-
-<p>If you liked this, you should follow me on <a href="https://twitter.com/mveytsman">twitter</a>.</p>
+<li><p>If a user is downloading multiple JARs in one go, we will backdoor each one. The malicious payload is executed only once per JAR, but if multiple JARs are backdoored, we will execute it several times. This issue will disappear if we replace the cat picture with a high quality persistent backdoor that is smart enough to only infect a system once :).</p></li>
+</ol>
 
 
                 <br>
@@ -1169,13 +1130,13 @@ hook will persist even if the user destroys the VM.</p>
                     
                     <div>
                         <img class="icon" src="http://max.computer/img/back.svg" alt="back" />
-                        <a href="http://max.computer/blog/my-solutions-to-the-stripe-ctf-web-app-edition/">My solutions to the Stripe CTF (web app edition)</a>
+                        <a href="http://max.computer/blog/2014/07/delimited-continuations-in-ruby-part-2-generators-and-coroutines/">Delimited Continuations in Ruby Part 2: Generators and Coroutines</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
                     
                     <div>
-                        <a href="http://max.computer/blog/hacking-letterpress/">Hacking Letterpress</a>
+                        <a href="http://max.computer/blog/2014/10/solving-the-expression-problem-in-clojure/">Solving the Expression Problem in Clojure</a>
                         <img class="icon" src="http://max.computer/img/next.svg" alt="next" />
                     </div>
                     

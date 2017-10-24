@@ -13,7 +13,7 @@
 
     <meta property="twitter:site" content="@mveytsman">
 
-<meta property="twitter:title" content="Hacking Letterpress">
+<meta property="twitter:title" content="Breaking in and out of Vagrant">
 
     <meta property="twitter:card" content="summary">
 
@@ -22,10 +22,10 @@
 <title>
 
 
-     Max.Computer - Hacking Letterpress 
+     Max.Computer - Breaking in and out of Vagrant 
 
 </title>
-<link rel="canonical" href="http://max.computer/blog/hacking-letterpress/">
+<link rel="canonical" href="http://max.computer/blog/2012/10/breaking-in-and-out-of-vagrant/">
 
 
 <style media="screen">
@@ -1009,17 +1009,17 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Hacking Letterpress
+    Breaking in and out of Vagrant
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Fri Nov 9 2012 00:00:00 UTC">Nov 9, 2012</div>
+                    <div class="date" title="Wed Oct 31 2012 00:00:00 UTC">Oct 31, 2012</div>
                     
                         
                     
-                    <div class="reading-time"><div class="middot"></div>3 minute read</div>
+                    <div class="reading-time"><div class="middot"></div>5 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1031,78 +1031,135 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 
     
 
-<p><strong>You can also find this post on my consultancy&rsquo;s blog <a href="http://finite.state.io/blog/2012/11/09/hacking-letterpress/">here</a></strong></p>
+<p>**You can also find this post on my consultancy&rsquo;s blog <a href="http://finite.state.io/blog/2012/10/30/breaking-in-and-out-of-vagrant/">here</a> **</p>
 
-<p><a href="http://www.atebits.com/letterpress/">Letterpress</a> is an iOS game
-that came out a few weeks ago and immediately became popular enough to <a href="https://twitter.com/marcoarment/statuses/261337316268859392">take down Apple&rsquo;s GameCenter</a>. It&rsquo;s a cross between <a href="http://daringfireball.net/linked/2012/10/24/letterpress">Scrabble and Go</a>. The game is played on a board made out of 25 letters and players take turns building words in order to capture the letters they use.</p>
+<p><a href="http://vagrantup.com/">Vagrant</a> is a great tool that allows you to
+easily spawn and configure lightweight VMs to use as development
+environments. Vagrant provides base installs of several flavours of
+Linux, and takes care of setting up networking and shared folders for
+you.</p>
 
-<p>I was hopelessly addicted to Letterpress until I figured out how to win consistently.</p>
+<p>Vagrant is really useful for managing your development environment,
+and I highly recommend it. If you&rsquo;re doing a lot of development,
+you might need to be running all kinds of application and database
+servers on your machine, and it&rsquo;s probably a much better idea to run
+them in a VM rather than on your host machine.</p>
 
-<p><img src="http://max.computer/img/letterpress/winning.png" alt="winning" /></p>
+<p>Unfortunately, if you expose your Vagrant VMs (or any development VMs
+really) to the outside world, what seemed like a secure best practice
+can end up being very insecure. This isn&rsquo;t a novel concept, but the
+disposable nature of virtual machines makes it easy to forget to think
+about their security. A common attitude is &ldquo;What&rsquo;s the worst that can
+happen if someone gets on my development VM? I blow away and
+re-generate this VM every half hour anyway, and aren&rsquo;t VM escape bugs
+rare and esoteric anyway?&rdquo;</p>
 
-<p>As it turns out, letterpress&rsquo;s dictionary is stored on the device. By simply adding words to Letterpress&rsquo;s dictionary, you can register any
-combination of letters as a valid word.</p>
+<p>I&rsquo;m going to show a really simple way to break out of Vagrant VMs, but first,</p>
 
-<p>Inside your iPhone, the dictionary is spread across a
-series of text files located in <code>/&lt;Letterpress
-folder&gt;/Letterpress.app/o/[ab-zz].txt</code>. For instance, <code>ab.txt</code>
-contains all the words that begin with aa, and so on and so forth.</p>
+<h2 id="how-vagrant-is-used">How Vagrant is Used</h2>
 
-<p>However, digging around a bunch of text files is no fun, and so I decided to
-write a tool to help me out.</p>
+<p>Vagrant VMs are designed to be lightweight and built per-project. The
+VMs around a concept of &ldquo;base boxes,&rdquo; which are base installs of
+various flavours of linux. You initialize a Vagrant VM from a base
+box, and then can install your desired environment.</p>
 
-<p>By the way, the author of Letterpress does <a href="https://twitter.com/lorenb/status/261617107656138752">know</a> about people cheating this way.</p>
+<p>By default, Vagrant shares your project folder
+with the VM at <code>/vagrant/</code>. So, a usual workflow would be:</p>
 
-<h2 id="automating-letterpress-cheating">Automating Letterpress cheating</h2>
-
-<p>First of all, it&rsquo;s a common misconception that you need to jailbreak a
-phone in order to access an individual app&rsquo;s files.
-Tools like
-<a href="http://www.macroplant.com/iexplorer/">iExplorer</a> allow you to, among
-other things, access an app&rsquo;s directory and modify the files there on any iPhone. (It&rsquo;s my understanding that they&rsquo;re using undocumented calls in the library iTunes uses for syncing in order to
-pull this off.)</p>
-
-<p>Since I didn&rsquo;t want to rely on a commercial tool like iExplorer,
-I decided to use <a href="http://www.libimobiledevice.org/">libimobiledevice</a>. Libimobiledevice
-is an open-source library for talking to iDevices over USB. It&rsquo;s capable of providing
-access to the filesystem, the iPhone internals, and much more.
-Libimobiledevice supports both OS X and Linux.</p>
-
-<p>I wrote a ruby gem that acts as an adapter for
-libimobiledevice and exposes some of the API calls in an object-oriented way. It&rsquo;s available on github as
-<a href="https://github.com/stateio/imobiledevice">imobiledevice</a>. So far, I have
-implemented only the small subset of libimobiledevice that I need,
-but I definitely welcome pull requests.</p>
-
-<p>Once I had a ruby wrapper for for libimobiledevice, it was simple to
-write an app that adds arbitrary words to the Letterpress dictionary.
-I call it
-<a href="https://github.com/stateio/letterpress-lexicographer">letterpress-lexicographer</a>.
-Here&rsquo;s how it works:</p>
-
-<h2 id="is-this-a-word">Is this a word?</h2>
-
-<p><img src="http://max.computer/img/letterpress/before.png" alt="Before" /></p>
-
-<h2 id="shucks">Shucks!</h2>
-
-<pre><code>./letterpress-lexicographer.rb
- [*] Connecting to iDevice
- [*] Connected to iDevice. UDID:REDACTED
- [*] Accessing Letterpress app
- [*] Accessed Letterpress app
- [?] What word would you like to add? (/q to quit)
-  -&gt; szug
- [+] Reading word-list /Letterpress.app/o/sz.txt
- [+] Inserting word szug into word-list /Letterpress.app/o/sz.txt
- [+] Successfully added word szug.  You can play it now!
+<pre><code class="language-bash">host: $ cd /my/project/here/
+host: $ #we're going to base our VM on an Ubuntu Lucid 32bit base box 
+host: $ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
+host: $ vagrant init lucid32 
+host: $ vagrant up
+host: $ vagrant ssh
+  vm: $ #now we are on the VM
+  vm: $ cd /vagrant/
+  vm: $ run_my_server
 </code></pre>
 
-<h2 id="let-s-try-again">Let&rsquo;s try again</h2>
+<p>You can then edit the code on your host machine, and use the VM to run an applciation and database server.</p>
 
-<p><img src="http://max.computer/img/letterpress/after.png" alt="After" /></p>
+<h2 id="bridging-the-network">Bridging the Network</h2>
 
-<p>You can find the app <a href="https://github.com/stateio/letterpress-lexicographer">here</a>.  Please enjoy responsibly.</p>
+<p>Just like in any virtual machine, you can configure your Vagrant VMs&rsquo;
+networking to run in host-only mode or in bridged mode. In host-only
+mode, a VM uses a virtual network adapter and is basically only
+accessible from the host. In bridged mode, the VM bridges through the
+network adapter of the host machine, and actually connects to the same
+network as the host. So, for example, if you bridge a VM to a wifi
+device, the VM will have a different IP address on the same wifi
+network as the host. And of course, you&rsquo;ll be able to access the VM
+from other machines on the wifi network. In host-only mode, the VM is
+not accessible from outside the host. As they say, NAT is the poor
+man&rsquo;s firewall.</p>
+
+<p>The Vagrant
+<a href="http://vagrantup.com/v1/docs/bridged_networking.html">documentation</a>
+doesn&rsquo;t mention any security risks of running development VMs in
+bridged mode. There&rsquo;s a promising alert box, but the contents are:</p>
+
+<blockquote>
+<h4 id="not-all-networks-work">Not All Networks Work!</h4>
+
+<p>Some networks will not work properly with bridged networking. Specifically, I&rsquo;ve found that hotel networks, airport networks, and generally public-shared networks have configurations in place such that bridging does not work.
+You can tell if the bridged networking worked successfully by seeing if the virtual machine was able to get an IP address on the bridged adapter.</p>
+</blockquote>
+
+<p>The author doesn&rsquo;t seem to see any intrinsic problem with running Vagrant VMs in hotels, airports, and coffee-shops outside of it sometimes not working.</p>
+
+<h2 id="breaking-in">Breaking In</h2>
+
+<p>So after scanning the airport wifi, you found someone running a
+Vagrant VM in bridged mode. How do you get in? First of all, they are
+most like likely doing some kind of development on it, so the VM is
+probably running an app that&rsquo;s not very secured. There&rsquo;s also a good
+chance that this VM is running a database and maybe CouchDB or Redis.
+One of these is probably using guessable credentials (this is the
+development environment after all), or the app itself might have an
+exploitable bug.</p>
+
+<p>All of the above sounds too hard. Remember the <code>vagrant ssh</code> command
+above? Well, it has to get in somehow.</p>
+
+<p>On all of the VMs built from official base boxes, like <code>lucid32</code> the
+credentials are <code>vagrant : vagrant</code>. The instructions for developers
+building new base boxes actually say not to use password-based SSH
+logins. Instead, anyone building a base box for public consumption is
+using these <a href="https://github.com/mitchellh/vagrant/tree/master/keys/">SSH keys</a> for the
+<code>vagrant</code> user.</p>
+
+<p>Either way, any Vagrant VM built from a public base box (read: almost
+all of them) is going to be accessible with either <code>vagrant : vagrant</code>
+or the SSH keys above.</p>
+
+<h2 id="breaking-out">Breaking Out</h2>
+
+<p>Breaking into a development VM isn&rsquo;t a big deal on it&rsquo;s own,
+especially since the vagrant workflow encourages blowing-away and
+rebuilding the VM often. What you really want is code execution on the
+host, and it&rsquo;s going to be surprisingly easy to do that.</p>
+
+<p>The Vagrant workflow encourages you to edit your code outside the VM.
+That&rsquo;s why Vagrant helpfully shares the project directory as
+<code>/vagrant/</code> in the VM. It&rsquo;s a safe assumption that anyone using
+Vagrant for development is using some kind of version control, and if
+that&rsquo;s the case, they are probably going to be interacting with it on
+the host machine (where they edit the code). This is how we&rsquo;ll get
+execution on the host.</p>
+
+<p>For simplicity, I&rsquo;m going to focus on Git, but this trick should work
+for any other commonly used VCS. Hooks are little shell scripts that
+run after you commit a certain action. For instance, a <code>post-commit</code>
+hook is a shell script that git will execute every time a commit is
+completed. Hooks are placed in <code>.git/hooks/HOOK-NAME</code>.</p>
+
+<p>So if I get on a Vagrant VM and want to escape into the host, all I
+have to do is create a post-commit hook. I simply put evil things in
+<code>/vagrant/.git/hooks/post-commit</code> and wait for the user to commit some
+code. Since the <code>/vagrant/</code> directory is mounted from the host, my
+hook will persist even if the user destroys the VM.</p>
+
+<p>If you liked this, you should follow me on <a href="https://twitter.com/mveytsman">twitter</a>.</p>
 
 
                 <br>
@@ -1112,13 +1169,13 @@ Here&rsquo;s how it works:</p>
                     
                     <div>
                         <img class="icon" src="http://max.computer/img/back.svg" alt="back" />
-                        <a href="http://max.computer/blog/breaking-in-and-out-of-vagrant/">Breaking in and out of Vagrant</a>
+                        <a href="http://max.computer/blog/2012/08/my-solutions-to-the-stripe-ctf-web-app-edition/">My solutions to the Stripe CTF (web app edition)</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
                     
                     <div>
-                        <a href="http://max.computer/blog/thoughts-on-bsidesto/">Thoughts on BsidesTO</a>
+                        <a href="http://max.computer/blog/2012/11/hacking-letterpress/">Hacking Letterpress</a>
                         <img class="icon" src="http://max.computer/img/next.svg" alt="next" />
                     </div>
                     

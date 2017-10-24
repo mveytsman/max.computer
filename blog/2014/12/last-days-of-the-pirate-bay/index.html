@@ -13,7 +13,7 @@
 
     <meta property="twitter:site" content="@mveytsman">
 
-<meta property="twitter:title" content="Delimited Continuations in Ruby Part 2: Generators and Coroutines">
+<meta property="twitter:title" content="Last Days of The Pirate Bay">
 
     <meta property="twitter:card" content="summary">
 
@@ -22,10 +22,10 @@
 <title>
 
 
-     Max.Computer - Delimited Continuations in Ruby Part 2: Generators and Coroutines 
+     Max.Computer - Last Days of The Pirate Bay 
 
 </title>
-<link rel="canonical" href="http://max.computer/blog/delimited-continuations-in-ruby-part-2-generators-and-coroutines/">
+<link rel="canonical" href="http://max.computer/blog/2014/12/last-days-of-the-pirate-bay/">
 
 
 <style media="screen">
@@ -1009,17 +1009,17 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Delimited Continuations in Ruby Part 2: Generators and Coroutines
+    Last Days of The Pirate Bay
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Mon Jul 21 2014 00:00:00 UTC">Jul 21, 2014</div>
+                    <div class="date" title="Fri Dec 12 2014 00:00:00 UTC">Dec 12, 2014</div>
                     
                         
                     
-                    <div class="reading-time"><div class="middot"></div>5 minute read</div>
+                    <div class="reading-time"><div class="middot"></div>3 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1029,186 +1029,66 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
             </div>
             <div class="markdown">
                 
-    
+    <p>I&rsquo;ll be showing my BitTorrent video collage at <a href="http://www.torontolongwinter.com/">Long Winter</a> tonight.</p>
 
-<p>Last <a href="http://blog.ontoillogical.com/blog/2014/07/12/delimited-continuations-in-ruby/">time</a>, I showed some basic things you can do with delimited continuations. If you&rsquo;re still confused about them (as I am!) another good tutorial is <a href="http://community.schemewiki.org/?composable-continuations-tutorial">here</a>.</p>
+<pre><code class="language-text">$ cat last-days.nfo
+    __               __     ____                            ____
+   / /   ____ ______/ /_   / __ \____ ___  _______   ____  / __/
+  / /   / __ `/ ___/ __/  / / / / __ `/ / / / ___/  / __ \/ /_  
+ / /___/ /_/ (__  ) /_   / /_/ / /_/ / /_/ (__  )  / /_/ / __/  
+/_____/\__,_/____/\__/  /_____/\__,_/\__, /____/   \____/_/     
+                                    /____/                      
+  ________            ____  _            __          ____             
+ /_  __/ /_  ___     / __ \(_)________ _/ /____     / __ )____ ___  __
+  / / / __ \/ _ \   / /_/ / / ___/ __ `/ __/ _ \   / __  / __ `/ / / /
+ / / / / / /  __/  / ____/ / /  / /_/ / /_/  __/  / /_/ / /_/ / /_/ / 
+/_/ /_/ /_/\___/  /_/   /_/_/   \__,_/\__/\___/  /_____/\__,_/\__, /  
+                                                             /____/   
 
-<p>Let&rsquo;s dive right in and build some more complicated control structures!</p>
+Last Days of The Pirate Bay
 
-<h2 id="generators">Generators</h2>
+On December 9th, Swedish police raided a datacenter in Stockholm and
+seized the servers that run The Pirate Bay, shutting down the world's
+most notorious and popular piracy site. Five days previously, on
+December 4th, I had bought a server under an assumed name from a
+European hosting company that doesn't ask too many questions, chose
+the 100 most popular movie torrents from The Pirate Bay, and began
+recording network traffic. I had no idea that I was recording the last
+days of The Pirate Bay.
 
-<p>Let&rsquo;s start by building what Python calls &ldquo;Generators.&rdquo; Ruby has Enumerators, which are pretty similar, but I&rsquo;ll call it a generator in order to differentiate my implementation from the Ruby core.</p>
+TPB was a BitTorrent tracker. BitTorrent is a way for many
+people to share large files over the internet. To download a movie
+over BitTorrent is to connect to other people downloading that movie
+and request little pieces. The pieces are downloaded out of order from
+your peers across the globe and then reassembled on your computer back
+into the movie you want.
 
-<p>Here&rsquo;s the code I want to write</p>
+After I downloaded the 100 most popular movies, I started to seed
+them for others to download. People from around the world are
+downloading little pieces of different movies from me, and as they do, I
+record the piece they ask for and the IP address they were coming
+from.
 
-<pre><code class="language-ruby">counter = Generator.new do |g| 
-  ctr = 0
-  while true
-    g.yield(ctr)
-    ctr += 1
-  end
-end
+You're watching a visualization of that traffic.
+
+The Pirate Bay might come back, but it probably won't. It's not needed
+anymore. About 20 million nodes are connected at any given time to a
+global sharing network that doesn't need websites like TPB
+to distribute information about which peer has which file. All the
+movies I downloaded are still being actively shared without TPB.
+
+TPB is gone, for now at least. Consider this my eulogy.
+
+The Pirate Bay 2003-2014(?)
+
+- Max Veytsman, December 2014
+
+Greets: Hacker School where writing a BitTorrent client is a right of
+passage, Nicolas Maigret who I shamelessly stole from, Long Winter for
+letting me do this.
 </code></pre>
 
-<p>Then I use it like so</p>
-
-<pre><code class="language-ruby">counter.next
-# =&gt; 0
-counter.next
-# =&gt; 1
-counter.next
-# =&gt; 2
-# ...
-</code></pre>
-
-<p>Using delimited continuations to build a generator is pretty straight-forward. Our constructor will get a block and surround it with a <code>prompt</code> to delimit a continuation. Yielding adds the yielded value into an internal queue, and uses <code>control</code> to capture a continuation. When we call that continuation, we will execute the code around the control, which is precisely like entering at where we called yield. Getting the next value of our generator pops a result off the queue and invokes the saved continuation.</p>
-
-<p>The annotated code is below.</p>
-
-<pre><code>class Generator
-  def initialize(&amp;block)
-    # @results will be used to save values yielded by our generator
-    @results = []
-    # Calling the block is wrapped in a prompt in order to enclose it in a continuation
-    DelimR.prompt do
-      # The block is passed self, so that it can call the yield method defined below
-      block.call(self)
-    end
-  end
-  
-  def yield(result)
-    # The yield method saves the result it receives, and saves the continuation in @next
-    @results &lt;&lt; result
-    DelimR.control do |k| 
-      @next = k
-    end
-  end
-  def next
-    # @result is used as a FIFO queue of yielded values
-    r = @results.shift
-
-    # an empty @results means that no more values have been yielded
-    if r.nil?
-      raise &quot;Iterator finished&quot;
-    end
-
-    # This invokes the saved continuation, not passing it any values
-    @next.call(nil)
-
-    # return the saved @result that was shifted off the bottom of the queue
-    r
-  end
-end
-</code></pre>
-
-<h2 id="coroutines">Coroutines</h2>
-
-<p>Coroutines, also known as Fibers in ruby-land, are subroutines that can suspend their execution, to be resumed at a later point. They are very useful as a lightweight thread-like construct. They are very similar to generators, and can actually be implemented in terms of <a href="http://legacy.python.org/dev/peps/pep-0342/">them</a>. Besides being useful for asynchronous tasks, <a href="http://eli.thegreenplace.net/2009/08/29/co-routines-as-an-alternative-to-state-machines/">&ldquo;Co-routines are to state machines what recursion is to stacks&rdquo;</a>.</p>
-
-<p>We can can modify our <code>Generator</code> class to be a coroutine by renaming <code>next</code> to <code>send</code> and allowing data to be passed into it, so <code>foo = c.yield</code> will alssign whatever is sent to the coroutine to <code>foo</code> when execution resumes.</p>
-
-<pre><code class="language-ruby">class Coroutine
-  # initialize and yield are the same as for Generator
-  def send(value=nil)
-    # @result is used as a FIFO queue of yielded values
-    r = @results.shift
-
-    # an empty @results means that no more values have been yielded
-    if r.nil?
-      raise &quot;Iterator finished&quot;
-    end
-
-    # This invokes the saved continuation, not passing it any values
-    @next.call(value)
-
-    # return the saved @result that was shifted off the bottom of the queue
-    r
-  end
-end
-</code></pre>
-
-<p>Here&rsquo;s an implementation of the parsing example from Eli Bendersky&rsquo;s blog <a href="http://eli.thegreenplace.net/2009/08/29/co-routines-as-an-alternative-to-state-machines/">post</a> using the Coroutine class defined above.</p>
-
-<pre><code class="language-ruby">def hex_encode(str)
-  str.split(//).map{ |x| x.ord.to_s(16) }.join
-end
-
-frame_receiver = Coroutine.new do |c| 
-  while true
-    frame = (c.yield(true))
-    puts 'Got frame:', hex_encode(frame)
-  end
-end
-
-unwrap_protocol = Coroutine.new do |c| 
-  header = &quot;\x61&quot;
-  footer = &quot;\x62&quot;
-  dle = &quot;\xAB&quot;
-  after_dle_func = lambda { |x| x }
-  target = frame_receiver
-  # Outer loop looking for a frame header
-  #
-  while true
-    byte = (c.yield(true))
-    frame = ''
-
-    if byte == header
-      # Capture the full frame
-      #
-      while true
-       
-        byte = (c.yield(true))
-        
-        if byte == footer
-
-          target.send(frame)
-          break
-        elsif byte == dle
-          byte = (c.yield(true))
-          frame += after_dle_func.call(byte)
-        else
-          frame += byte
-        end
-      end
-    end
-  end
-end
-
-
-
-bytes = [0x70, 0x24,
-         0x61, 0x99, 0xAF, 0xD1, 0x62,
-         0x56, 0x62,
-         0x61, 0xAB, 0xAB, 0x14, 0x62,
-         0x7
-        ].map(&amp;:chr)
-
-
-bytes.each do |byte|
-  unwrap_protocol.send(byte)
-end
-
-# Got frame:
-# 99afd1
-# Got frame:
-# ab14
-</code></pre>
-
-<h2 id="final-thoughts">Final thoughts</h2>
-
-<p>Once I had prompt/control, I found implementing generators and coroutines pretty straightforward. I think that prompt/control are easier to reason about then non-delimited continuations. One piece of evidence that I have for this is that Ruby&rsquo;s <a href="https://github.com/ruby/ruby/blob/ruby_1_8_7/lib/generator.rb">implementation</a> of generators using non-delimited continuations is harder (for me) to understand then the one above using delimited continuations.</p>
-
-<p>Either way, having an abstraction that allows you to implement new control structures is really cool and empowering. For instance, this <a href="http://www.ccs.neu.edu/racket/pubs/pldi93-sitaram.pdf">paper</a> uses delimited continuations to implement Prolog-like backtracking!</p>
-
-<p>There are still many things I don&rsquo;t understand about continuations, a partial list is below</p>
-
-<ol>
-<li>There is a difference between prompt/control and reset/shift. I don&rsquo;t know what it is.</li>
-<li>I don&rsquo;t entirely understand what <code>@@keep_delimiter_upon_effect</code> does in <a href="https://github.com/mveytsman/DelimR/blob/master/lib/delimr.rb">https://github.com/mveytsman/DelimR/blob/master/lib/delimr.rb</a></li>
-<li>In the generator example, why doesn&rsquo;t the line <code>ctr=0</code> get executed on every iteration?</li>
-<li>I actually implemented semi-coroutines. For full coroutines I need to be able to transfer exeution between them. My instricnt is that I can do this by calling resume on the target coroutine, but seeing this in the Ruby Fiber documentation makes me think there is something non-trivial I don&rsquo;t understand here:
-&gt; You cannot resume a fiber that transferred control to another one. This will cause a double resume error. You need to transfer control back to this fiber before it can yield and resume.</li>
-</ol>
+<p><img src="http://max.computer/img/last-days/last-days.png" alt="Last Days of The Pirate Bay" /></p>
 
 
                 <br>
@@ -1218,15 +1098,10 @@ end
                     
                     <div>
                         <img class="icon" src="http://max.computer/img/back.svg" alt="back" />
-                        <a href="http://max.computer/blog/delimited-continuations-in-ruby-part-1/">Delimited Continuations in Ruby Part 1</a>
+                        <a href="http://max.computer/blog/2014/10/solving-the-expression-problem-in-clojure/">Solving the Expression Problem in Clojure</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
-                    
-                    <div>
-                        <a href="http://max.computer/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/">How to take over the computer of any Java (or Clojure or Scala) developer</a>
-                        <img class="icon" src="http://max.computer/img/next.svg" alt="next" />
-                    </div>
                     
                 </div>
             
