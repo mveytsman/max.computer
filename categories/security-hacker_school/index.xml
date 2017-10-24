@@ -14,10 +14,10 @@
     
     <item>
       <title>How to take over the computer of any Java (or Clojure or Scala) developer</title>
-      <link>http://max.computer/blog/2014/07/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</link>
+      <link>http://max.computer/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</link>
       <pubDate>Mon, 28 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://max.computer/blog/2014/07/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</guid>
+      <guid>http://max.computer/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/</guid>
       <description>Update: 07/31/2014
 Sonatype has reacted to this post and will soon be turning on SSL access for all users. Their blog post announcing this is here. I&amp;rsquo;m very happy that they are making this change, and the Java ecosystem is going to be more secure for it!
 That being said, if you&amp;rsquo;re reading this and are thinking of charging $10 to gauge the true demand for security features in your product, don&amp;rsquo;t.</description>

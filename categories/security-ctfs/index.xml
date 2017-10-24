@@ -14,10 +14,10 @@
     
     <item>
       <title>My solutions to the Stripe CTF (web app edition)</title>
-      <link>http://max.computer/blog/2012/08/my-solutions-to-the-stripe-ctf-web-app-edition/</link>
+      <link>http://max.computer/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</link>
       <pubDate>Thu, 30 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://max.computer/blog/2012/08/my-solutions-to-the-stripe-ctf-web-app-edition/</guid>
+      <guid>http://max.computer/blog/my-solutions-to-the-stripe-ctf-web-app-edition/</guid>
       <description>You can also find this post on my consultancy&amp;rsquo;s blog here
 Stripe recently ran a CTF focused on web application hacking. It ended yesterday, and I decided to write up my solutions. If you have any questions or find a bug in my solutions, you can reach me at max [at] state.io.
 First of all, I had an great time solving these challenges. Big thanks to the Stripe team for creating such a fun game.</description>
