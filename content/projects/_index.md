@@ -17,7 +17,7 @@ project_categories:
         summary: appcanary's predecessor
         link_to: gemcanary/
 
-  - category: Security stuff
+  - category: Research
     projects:
       - title: Rubysec
         dates: 2013-present
@@ -26,19 +26,24 @@ project_categories:
         
       - title: Dilettante
         dates: 2014
-        summary: messing with maven
+        summary: code injection via insecure updates
         link_to: dilettante/
         
       - title: Tinder Finder
         dates: 2013
-        summary: tinder + trigonometry
+        summary: invading privacy via trigonometry
         link_to: tinder/
         
   - category: Art & media
     projects:
+      - title: Thousand Ether Homepage
+        dates: 2017-present
+        summary: selling pixels for tokens
+        link_to: https://thousandetherhomepage.com
+    
       - title: Appcanary Podcast
         dates: 2017-present
-        summary: two white guys talk tech
+        summary: there are many like it, this one is mine
         link_to: https://podcast.appcanary.com
         
       - title: Last Days of Pirate Bay
