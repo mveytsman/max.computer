@@ -1106,8 +1106,12 @@ section.main .content .markdown pre, section.main .content .markdown pre code {
 
 
 <script>
+ function setAge() {
+   document.getElementById("age").innerHTML = ((new Date() - new Date(1988,4,1)) / (1000*60*60*24)).toPrecision(10);
+   setTimeout(setAge, 864) 
+ }
  document.addEventListener('DOMContentLoaded', function() {
-     document.getElementById("age").innerHTML = Math.round((new Date() - new Date(1988,01,05)) / (1000*60*60*24))
+   setAge();
  });
 </script>
 
